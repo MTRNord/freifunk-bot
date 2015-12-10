@@ -9,7 +9,7 @@ module.exports = {
 		bot.addListener('error', function(message) {
     		console.log('error: ', message);
 		});
-		client.connect();
+		bot.connect();
 		bot.send('msg', 'NickServ identify DoorBot');
 		bot.say('#hackerspace', 'Door Bot is starting to watch on the Door Status');
 	},
