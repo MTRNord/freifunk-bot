@@ -1,2 +1,2 @@
-# nordlab-pushbulletDoor
-RSS-Feed Generator for pushing Door Status to Pushbullet Channel
+# nordlab-hackerspace-door
+Modular parser for the hackerspace door status with handlers for multiple services

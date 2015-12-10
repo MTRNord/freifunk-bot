@@ -1,5 +1,8 @@
 var request = require('request');
-var curl = require('curlrequest');
+//LOAD MODULES DOWN HERE
+var pushbullet = require('./handlers/pushbullet.js');
+var irc = require('./handlers/irc.js');
+
 
 function sleep(milliseconds) {
   var start = new Date().getTime();
@@ -29,12 +32,9 @@ request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, re
       }else{
         door_status = "open";
       }
-
-      curl.request({ url: 'https://api.pushbullet.com/v2/pushes', method: 'POST', headers: { "Access-Token": 'Access-Token', "Content-Type": 'application/json' }, data: '{"channel_tag": "space-door", "body":"'+ door_status + '","title":"Door Status","type":"note"}'}, function (err, stdout, meta) {
-        console.log(err);
-        console.log('\n STDOUT: \n');
-        console.log(stdout);
-      });
+      //ADD MODULE RUNTIMES DOWN HERE
+      pushbullet.pushbulletSend(door_status);
+      //irc.ircSend(door_status);
     }
     console.log("WAIT!");
     sleep(9*1000);

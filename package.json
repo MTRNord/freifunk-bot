@@ -1,0 +1,31 @@
+{
+  "name": "nordlab-hackerspace-door",
+  "version": "0.0.1",
+  "description": "Modular parser for the hackerspace door status with handlers for multiple services",
+  "author": "Marcel Radzio <info@nordgedanken.de>",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MTRNord/nordlab-nordlab-hackerspace-door"
+  },
+  "bugs": {
+  "url": "https://github.com/MTRNord/nordlab-nordlab-hackerspace-door/issues"
+  },
+  "keywords": [
+    "door",
+    "services",
+    "notification"
+  ],
+  "dependencies": {
+    "request": "*",
+    "curlrequest": "*",
+    "irc": "*",
+  },
+  "preferGlobal": false,
+  "private": true,
+  "license": "MIT"
+}
+  
