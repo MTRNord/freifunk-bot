@@ -3,7 +3,8 @@ module.exports = {
 	ircPreload: function (){
 		var bot = new irc.Client('irc.lugfl.de', 'DoorBot', {
 			debug: true,
-			channels: ['#hackerspace']
+			channels: ['#hackerspace'],
+			messageSplit: 1000000
 		});
 		bot.addListener('error', function(message) {
     		console.log('error: ', message);
