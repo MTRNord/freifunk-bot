@@ -13,6 +13,7 @@ function sleep(milliseconds) {
   }
 }
 var door_status2 = "1";
+irc.ircPreload();
 function MakePush(){
 request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
     if (!error && response.statusCode == 200) {
