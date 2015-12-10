@@ -12,7 +12,7 @@
     "url": "https://github.com/MTRNord/nordlab-nordlab-hackerspace-door"
   },
   "bugs": {
-  "url": "https://github.com/MTRNord/nordlab-nordlab-hackerspace-door/issues"
+    "url": "https://github.com/MTRNord/nordlab-nordlab-hackerspace-door/issues"
   },
   "keywords": [
     "door",
@@ -22,7 +22,7 @@
   "dependencies": {
     "request": "*",
     "curlrequest": "*",
-    "irc": "*",
+    "irc": "*"
   },
   "preferGlobal": false,
   "private": true,
