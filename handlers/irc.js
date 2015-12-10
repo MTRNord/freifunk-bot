@@ -10,6 +10,6 @@ module.exports = {
 		});
 	},
 	ircSend: function (door_status){
-		// bot.say('#hackerspace', "Door Status changed to: ");
+		bot.say('#hackerspace', 'Door Status changed to: ');
 	}
 };
