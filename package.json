@@ -22,7 +22,7 @@
   "dependencies": {
     "request": "*",
     "curlrequest": "*",
-    "irc": "*"
+    "irc": "0.4.0"
   },
   "preferGlobal": false,
   "private": true,
