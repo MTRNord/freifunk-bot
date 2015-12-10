@@ -9,16 +9,14 @@ module.exports = {
 		bot.addListener('error', function(message) {
     		console.log('error: ', message);
 		});
-		bot.connect(5, function() {
+		bot.connect(10, function() {
     		bot.send('msg', 'NickServ identify DoorBot');
 			bot.say('#hackerspace', 'Door Bot is starting to watch on the Door Status');
 		});
 		
 	},
 	ircSend: function (door_status){
-		bot.connect(5, function() {
-    		bot.send('say', 'Door Status changed to: ' + door_status);
-		});
+    	bot.say('#hackerspace', 'Door Status changed to: ' + door_status);
 		
 	}
 };
