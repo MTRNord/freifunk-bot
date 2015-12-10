@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Nordlab Hackerspace Door</title>
+        <description>Nordlab Hackerspace Door to Pushbullet!</description>
+        <link>http://www.nordlab-ev.de/doorstate/status.txt</link>
+        <lastBuildDate>Thu, 10 Dec 2015 17:18:14 GMT</lastBuildDate>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        <image>
+            <title>Nordlab Hackerspace Door</title>
+            <url>https://avatars0.githubusercontent.com/u/7987227?v=3&amp;s=200</url>
+            <link>http://www.nordlab-ev.de/doorstate/status.txt</link>
+        </image>
+        <copyright>Marcel Radzio</copyright>
+        <generator>Feed for Node.js</generator>
+        <item>
+            <title><![CDATA[Door Status]]></title>
+            <link>http://www.nordlab-ev.de/doorstate/status.txt</link>
+            <guid>http://www.nordlab-ev.de/doorstate/status.txt</guid>
+            <description><![CDATA[Door is: open]]></description>
+            <content:encoded/>
+        </item>
+    </channel>
+</rss>
