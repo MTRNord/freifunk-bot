@@ -1,3 +1,3 @@
 1. npm install request
 2. npm install feed
-2. npm install ssh2
+3. npm install simple-git
