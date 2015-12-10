@@ -30,7 +30,7 @@ request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, re
         door_status = "open";
       }
 
-      curl.request({ url: 'https://api.pushbullet.com/v2/pushes', method: 'POST', headers: { "Access-Token": 'v1TpGyUfIoydWW1KZa4KWfjmMcfnDYyTdGuju3ZH58Y7E', "Content-Type": 'application/json' }, data: '{"channel_tag": "space-door", "body":"'+ door_status + '","title":"Door Status","type":"note"}'}, function (err, stdout, meta) {
+      curl.request({ url: 'https://api.pushbullet.com/v2/pushes', method: 'POST', headers: { "Access-Token": 'Access-Token', "Content-Type": 'application/json' }, data: '{"channel_tag": "space-door", "body":"'+ door_status + '","title":"Door Status","type":"note"}'}, function (err, stdout, meta) {
         console.log(err);
         console.log('\n STDOUT: \n');
         console.log(stdout);
