@@ -8,6 +8,6 @@ module.exports = {
 		bot.addListener('error', function(message) {
     		console.log('error: ', message);
 		});
-		bot.say('#hackerspace', "Door Status changed to: ");
+		// bot.say('#hackerspace', "Door Status changed to: ");
 	}
 };
