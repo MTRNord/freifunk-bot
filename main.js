@@ -36,7 +36,7 @@ request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, re
         }
         //ADD MODULE RUNTIMES DOWN HERE
         pushbullet.pushbulletSend(door_status);
-        //irc.ircSend(door_status);
+        irc.ircSend(door_status);
       }else{
         door_status2 = door_status;
       }
@@ -56,7 +56,7 @@ request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, re
     process.on("SIGINT", function () {
       irc.ircStopp();
       process.exit();
-    });
+    }).setMaxListeners(0);
     setTimeout(function() { MakePush(); }, 10000);
 }).setMaxListeners(0);
 }

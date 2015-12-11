@@ -20,7 +20,7 @@ module.exports = {
 			bot.send('nick', 'DoorBot');
     		bot.say('NickServ', 'identify DoorBotPass');
 			bot.join('#hackerspace');
-			bot.say('#hackerspace', 'Door Bot is starting to watch on the Door Status');
+			//bot.say('#hackerspace', 'Door Bot is starting to watch on the Door Status');
 		})
 	},
 	ircSend: function (door_status){
@@ -34,7 +34,23 @@ module.exports = {
 		bot.addListener('message', function (from, to, message) {
 			if (message == "!help"){
     			console.log(from + ' => ' + to + ': ' + message);
-    			bot.say(from, "Here is your Help!\nCommand List:\n- !help - Shows this page.\n- !DoorStatus - Shows the actual Door Status in an PM\n- !DoorStatus channel - Shows the actual Door Status in the channel drom where it was run");
+    			bot.say(from, "Here is your Help!\nCommand List:\n- !help - Shows this page.\n- !DoorStatus - Shows the actual Door Status in an PM\n- !DoorStatus channel - Shows the actual Door Status in the channel drom where it was run\n- !where - Shows the address of the Nordlab e.V.\n- !who - Shows who is allowed to come to the Nordlab e.V.\n- !when - Shows who the Nordlab e.V. Hackerspace usually is open");
+    		}
+    		if (message == "!hilfe"){
+    			console.log(from + ' => ' + to + ': ' + message);
+    			bot.say(from, "Hier ist die Hilfe!\nBefehl-liste:\n- !hilfe - Zeigt diese Seite.\n- !DoorStatus - Sendet eine PM mit dem aktuellen Status\n- !DoorStatus channel - Sendet in den Channel wo der Befehl ausgeführt wurde den aktuellen Status\n- !where - Zeigt die Addresse vom Nordlab e.V.\n- !who - Zeigt wer alles kommen darf Nordlab e.V.\n- !when - Zeigt wann der Nordlab e.V. Hackerspace geöffnet hat");
+    		}
+    		if (message == "!where"){
+    			console.log(from + ' => ' + to + ': ' + message);
+    			bot.say(from, "You can find the Hackerspace in:\nOffener Kanal Flensburg\nSt.-Jürgen-Straße 95\n24937 Flensburg\nAt the very Top of the building");
+    		}
+    		if (message == "!who"){
+    			console.log(from + ' => ' + to + ': ' + message);
+    			bot.say(from, "Everybody can come to the Norlab e.V.");
+    		}
+    		if (message == "!when"){
+    			console.log(from + ' => ' + to + ': ' + message);
+    			bot.say(from, "The Hackerpace of Norlab e.V. is usually opened every Monday at 18pm o'clock.");
     		}
     		if (message == "!DoorStatus"){
     			request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
