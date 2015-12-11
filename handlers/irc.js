@@ -7,12 +7,12 @@ var bot = new irc.Client('irc.lugfl.de', 'DoorBot', {
 			messageSplit: 1000000
 		});
 var request = require('request');
+var fs = require('fs');
 module.exports = {
 	ircPreload: function (){
 		bot.addListener('error', function(message) {
-    		console.log('error: ', message);
     		setTimeout(function() { console.log("wait 7sek"); }, 7000);
-    		irc.ircNick();
+    		bot.send('nick', 'DoorBot'); 
     		bot.say('NickServ', 'identify DoorBotPass');
 		});
 		setTimeout(function() { console.log("wait 7sek"); }, 7000);
@@ -33,6 +33,7 @@ module.exports = {
 	},
 	ircBotCommands: function(){
 		bot.addListener('message', function (from, to, message) {
+			message = message.toLowerCase();
 			if (message == "!help"){
     			console.log(from + ' => ' + to + ': ' + message);
     			bot.say(from, "Here is your Help!\nCommand List:\n- !help - Shows this page.\n- !DoorStatus - Shows the actual Door Status in an PM\n- !DoorStatus channel - Shows the actual Door Status in the channel drom where it was run\n- !where - Shows the address of the Nordlab e.V.\n- !who - Shows who is allowed to come to the Nordlab e.V.\n- !when - Shows who the Nordlab e.V. Hackerspace usually is open");
@@ -51,9 +52,9 @@ module.exports = {
     		}
     		if (message == "!when"){
     			console.log(from + ' => ' + to + ': ' + message);
-    			bot.say(from, "The Hackerpace of Norlab e.V. is usually opened every Monday at 18pm o'clock.");
+    			bot.say(from, "The Hackerpace of Norlab e.V. is usually opened every Monday at 6pm o'clock.");
     		}
-    		if (message == "!DoorStatus"){
+    		if (message == "!doorstatus"){
     			request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
     				if (!error && response.statusCode == 200) {
       					door_status = body;
@@ -71,23 +72,35 @@ module.exports = {
     				bot.say(from, "DoorStatus is: " + door_status);
     			}).setMaxListeners(0);
     		}
-    		if (message == "!DoorStatus channel"){
-    			request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
-    				if (!error && response.statusCode == 200) {
-      					door_status = body;
-      					//console.log(body);
-    				}else{
-      					door_status = error;
-      					//console.log(error);
-    				}
-    				if (door_status == "geschlossen"){
-          				door_status = "closed";
-        			}else{
-          				door_status = "open";
-        			}
-    				console.log(from + ' => ' + to + ': ' + message);
-    				bot.say(to, "DoorStatus is: " + door_status);
-    			}).setMaxListeners(0);
+			var channel = message.split(" ");
+    		if (message == "!doorstatus " + channel[channel.length-1]){
+					request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
+    					if (!error && response.statusCode == 200) {
+      						door_status = body;
+      						//console.log(body);
+    					}else{
+      						door_status = error;
+      						//console.log(error);
+    					}
+    					if (door_status == "geschlossen"){
+          					door_status = "closed";
+        				}else{
+          					door_status = "open";
+        				}
+        				console.log(message);
+        				bot.list();
+        				bot.addListener('channellist', function (channel_list) {
+        					for (var key in channel_list) {
+  								if (channel_list.hasOwnProperty(key)) {
+									if (channel_list[key]["name"] == channel[channel.length-1]) {
+										console.log("1");
+										bot.join(channel[channel.length-1]);
+    									bot.say(channel[channel.length-1], "DoorStatus is: " + door_status);
+									}
+  								}
+							}
+						});
+    				}).setMaxListeners(0);
     		}
     		if (message == "!kill"){
     			if ((from == "DasNordlicht") || (from == "MTRNord")) {
