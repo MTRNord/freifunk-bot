@@ -17,10 +17,10 @@ irc.ircPreload();
 function MakePush(){
 request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      var door_status = body;
+      door_status = body;
       //console.log(body);
     }else{
-      var door_status = error;
+      door_status = error;
       //console.log(error);
     }
     console.log("Current Real State:" + door_status + "\n");
@@ -36,14 +36,29 @@ request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, re
         }
         //ADD MODULE RUNTIMES DOWN HERE
         pushbullet.pushbulletSend(door_status);
-        irc.ircSend(door_status);
+        //irc.ircSend(door_status);
       }else{
         door_status2 = door_status;
       }
     }
     console.log("WAIT!");
-    sleep(9*1000);
-    MakePush();
-});
+    if (process.platform === "win32") {
+      var rl = require("readline").createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+
+      rl.on("SIGINT", function () {
+        process.emit("SIGINT");
+      });
+    }
+
+    process.on("SIGINT", function () {
+      irc.ircStopp();
+      process.exit();
+    });
+    setTimeout(function() { MakePush(); }, 10000);
+}).setMaxListeners(0);
 }
-MakePush();
+irc.ircBotCommands();
+setTimeout(function() { MakePush(); }, 20000);
