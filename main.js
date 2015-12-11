@@ -23,9 +23,9 @@ request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, re
       door_status = error;
       //console.log(error);
     }
-    console.log("Current Real State:" + door_status + "\n");
-    console.log("Current Last State:" + door_status2 + "\n");
-    console.log("Next Check!");
+    // console.log("Current Real State:" + door_status + "\n");
+    // console.log("Current Last State:" + door_status2 + "\n");
+    // console.log("Next Check!");
     if (door_status2 !== door_status){
       if (door_status2 !== "1") {
         door_status2 = door_status;
@@ -41,7 +41,7 @@ request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, re
         door_status2 = door_status;
       }
     }
-    console.log("WAIT!");
+    // console.log("WAIT!");
     if (process.platform === "win32") {
       var rl = require("readline").createInterface({
         input: process.stdin,
