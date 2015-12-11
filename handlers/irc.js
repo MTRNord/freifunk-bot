@@ -25,6 +25,7 @@ module.exports = {
 	},
 	ircSend: function (door_status){
     	bot.say('#hackerspace', 'Door Status changed to: ' + door_status);
+    	// bot.send('topic','#hackerspace "Hackerspace Flensburg - Treffen jeden Montag 18:00 Uhr im Offenen Kanal Flensburg! - Tür Status"' + door_status);
     	console.log("IRC Door Status Chnaged");
 	},
 	ircStopp: function() {
