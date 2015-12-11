@@ -7,7 +7,6 @@ var bot = new irc.Client('irc.lugfl.de', 'DoorBot', {
 			messageSplit: 1000000
 		});
 var request = require('request');
-var fs = require('fs');
 module.exports = {
 	ircPreload: function (){
 		bot.addListener('error', function(message) {
@@ -57,6 +56,14 @@ module.exports = {
     		if (message == "!when"){
     			// console.log(from + ' => ' + to + ': ' + message);
     			bot.say(from, "The Hackerpace of Norlab e.V. is usually opened every Monday at 6pm o'clock.");
+    		}
+    		if (message == "!klassiker"){
+    			// console.log(from + ' => ' + to + ': ' + message);
+    			bot.say(to, "Für mehr oder weniger hilfreiche Kommentare den klassiker fragen.");
+    		}
+    		if (message == "make me a sandwich"){
+    			// console.log(from + ' => ' + to + ': ' + message);
+    			bot.say(to, "REALLY??? DO IT ON YOUR OWN!! I am NOT your Maid!!");
     		}
     		if (message == "!doorstatus"){
     			request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
