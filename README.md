@@ -20,7 +20,7 @@ Commands
 ```!where``` - Send an PM with the address of the Hackerspace<br>
 ```!who``` - Send an PM with information about who can go to the Hackerspace<br>
 ```!when``` - Send an PM with information about when the Hackerspace usually is open<br>
-```!source``` - Send an PM with the Link of this Repo<br>
+```!source``` - Send an PM with the Link of this Repo. If you add this after it you can post it in the actual channel<br>
 ```!license``` - Send an PM with the link of the Bot license<br>
 ```!afk``` - Send in the actual channel that you are A(way) F(rom) K(eyboard)<br>
 ```!alone``` - Send in the actual channel that you are Alone in the channel<br>
