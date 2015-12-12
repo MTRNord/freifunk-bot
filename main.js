@@ -6,6 +6,9 @@ var argv = require('yargs').argv;
 var pushbullet = require('./handlers/pushbullet.js');
 var irc = require('./handlers/irc.js');
 
+//Constants
+var SIGINT = "SIGINT";
+
 
 function sleep(milliseconds) {
   var start = new Date().getTime();
@@ -52,12 +55,12 @@ request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, re
         output: process.stdout
       }).setMaxListeners(0);
 
-      rl.on("SIGINT", function () {
-        process.emit("SIGINT");
+      rl.on(SIGINT, function () {
+        process.emit(SIGINT);
       }).setMaxListeners(0);
     }
 
-    process.on("SIGINT", function () {
+    process.on(SIGINT, function () {
       irc.ircStopp();
       process.exit();
     }).setMaxListeners(0);
@@ -68,7 +71,7 @@ irc.ircBotCommands();
 if (!argv.noupdate) {
   var j = schedule.scheduleJob('* 2 * * *', function(){
     console.log('Start Update!');
-    bot.ircEndCustom('Start Update! Coming back in a few Senconds!');
+    bot.ircEndCustom('Start update! Coming back in a few Seconds!');
     git.pull(function(err, update) {
       if(update && update.summary.changes) {
         require('child_process').exec('npm restart');
@@ -78,8 +81,8 @@ if (!argv.noupdate) {
 }
 if (argv.noupdate) {
   var j = schedule.scheduleJob('* 2 * * *', function(){
-    console.log('Daily Restart!');
-    bot.ircEndCustom('Daily Restart! Coming back in a few Senconds!');
+    console.log('Daily restart!');
+    bot.ircEndCustom('Daily restart! Coming back in a few Seconds!');
     require('child_process').exec('npm restart');
   });
 }
