@@ -1,5 +1,5 @@
 var irc = require('irc');
-var bot = new irc.Client('irc.lugfl.de', 'DoorBot', {
+var bot = new irc.Client('irc.lugfl.de', 'NordlabBot', {
 			debug: false,
 			channels: ['#hackerspace'],
 			autoRejoin: false,
@@ -7,21 +7,22 @@ var bot = new irc.Client('irc.lugfl.de', 'DoorBot', {
 			messageSplit: 1000000
 		});
 var request = require('request');
+var command_config = require("../commands.json");
 module.exports = {
 	ircPreload: function (){
 		bot.addListener('error', function(message) {
     		setTimeout(function() { 
     			// console.log("wait 7sek"); 
     		}, 7000);
-    		bot.send('nick', 'DoorBot'); 
-    		bot.say('NickServ', 'identify DoorBotPass');
+    		bot.send('nick', 'NordlabBot'); 
+    		bot.say('NickServ', 'identify NordlabBotPass');
 		});
 		setTimeout(function() { 
 			// console.log("wait 7sek"); 
 		}, 7000);
 		bot.connect(10, function() {
-			bot.send('nick', 'DoorBot');
-    		bot.say('NickServ', 'identify DoorBotPass');
+			bot.send('nick', 'NordlabBot');
+    		bot.say('NickServ', 'identify NordlabBotPass');
 			bot.join('#hackerspace');
 			//bot.say('#hackerspace', 'Door Bot is starting to watch on the Door Status');
 		})
@@ -37,50 +38,34 @@ module.exports = {
 	ircBotCommands: function(){
 		bot.addListener('message', function (from, to, message) {
 			message = message.toLowerCase();
-			if (message == "!help"){
-    			// console.log(from + ' => ' + to + ': ' + message);
-    			bot.say(from, "Here is your Help!\nCommand List:\n- !help - Shows this page.\n- !DoorStatus - Shows the actual Door Status in an PM\n- !DoorStatus channel - Shows the actual Door Status in the channel drom where it was run\n- !where - Shows the address of the Nordlab e.V.\n- !who - Shows who is allowed to come to the Nordlab e.V.\n- !when - Shows who the Nordlab e.V. Hackerspace usually is open");
-    		}
-    		if (message == "!hilfe"){
-    			// console.log(from + ' => ' + to + ': ' + message);
-    			bot.say(from, "Hier ist die Hilfe!\nBefehl-liste:\n- !hilfe - Zeigt diese Seite.\n- !DoorStatus - Sendet eine PM mit dem aktuellen Status\n- !DoorStatus channel - Sendet in den Channel wo der Befehl ausgeführt wurde den aktuellen Status\n- !where - Zeigt die Addresse vom Nordlab e.V.\n- !who - Zeigt wer alles kommen darf Nordlab e.V.\n- !when - Zeigt wann der Nordlab e.V. Hackerspace geöffnet hat");
-    		}
-    		if (message == "!where"){
-    			// console.log(from + ' => ' + to + ': ' + message);
-    			bot.say(from, "You can find the Hackerspace in:\nOffener Kanal Flensburg\nSt.-Jürgen-Straße 95\n24937 Flensburg\nAt the very Top of the building");
-    		}
-    		if (message == "!who"){
-    			// console.log(from + ' => ' + to + ': ' + message);
-    			bot.say(from, "Everybody can come to the Norlab e.V.");
-    		}
-    		if (message == "!when"){
-    			// console.log(from + ' => ' + to + ': ' + message);
-    			bot.say(from, "The Hackerpace of Norlab e.V. is usually opened every Monday at 6pm o'clock.");
-    		}
-    		if (message == "!source"){
-    			// console.log(from + ' => ' + to + ': ' + message);
-    			bot.say(from, "You can find the Source of this bot at https://github.com/MTRNord/nordlab-hackerspace-door");
-    		}
-    		if (message == "!klassiker"){
-    			// console.log(from + ' => ' + to + ': ' + message);
-    			bot.say(to, "Für mehr oder weniger hilfreiche Kommentare den klassiker fragen.");
-    		}
-    		if (message == "make me a sandwich"){
-    			// console.log(from + ' => ' + to + ': ' + message);
-    			bot.say(to, "REALLY??? DO IT ON YOUR OWN!! I am NOT your Maid!!");
-    		}
-    		if (message == "!stina"){
-    			// console.log(from + ' => ' + to + ': ' + message);
-    			bot.say(to, "Stina liebt unzielgerichteten Unsinn *lach*");
-    		}
-    		if (message == "!afk"){
-    			// console.log(from + ' => ' + to + ': ' + message);
-    			bot.say(to, from + " is now afk.");
-    		}
-    		if (message == "!alone"){
-    			// console.log(from + ' => ' + to + ': ' + message);
-    			bot.say(to, from + " is now alone.");
-    		}
+    		for (var key in command_config["commands"]) {
+  				if (command_config["commands"].hasOwnProperty(key)) {
+  					// console.log("!" + JSON.stringify(command_config["commands"][key]["keyword"]));
+					if (message == ("!" + command_config["commands"][key]["keyword"])) {
+						if (command_config["commands"][key]["before"] == "from") {
+    						if (command_config["commands"][key]["target"] == "from") {
+								bot.say(from, from + command_config["commands"][key]["message"]);
+							}else{
+								bot.say(to, from + command_config["commands"][key]["message"]);
+							}
+						}else{
+							if (!command_config["commands"][key]["before"]) {
+    							if (command_config["commands"][key]["target"] == "from") {
+									bot.say(from, command_config["commands"][key]["message"]);
+								}else{
+									bot.say(to, command_config["commands"][key]["message"]);
+								}
+							}else{
+								if (command_config["commands"][key]["target"] == "from") {
+									bot.say(from, to + command_config["commands"][key]["message"]);
+								}else{
+									bot.say(to, to + command_config["commands"][key]["message"]);
+								}
+							}
+						}
+					}
+  				}
+			}
     		if (message == "!doorstatus"){
     			request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
     				if (!error && response.statusCode == 200) {
@@ -116,18 +101,24 @@ module.exports = {
         			}
         			// console.log(message);
         			bot.list();
+        			// console.log(channel[(channel.length-(channel.length-1))+1]);
+        			// console.log(channel.length);
         			if (channel[channel.length-1] !== "this"){
-        				bot.addListener('channellist', function (channel_list) {
-        					for (var key in channel_list) {
-  								if (channel_list.hasOwnProperty(key)) {
-									if (channel_list[key]["name"] == channel[channel.length-1]) {
-										// console.log("1");
-    									bot.join(channel[channel.length-1]);
-    									bot.say(channel[channel.length-1], "DoorStatus is: " + door_status);
-									}
-  								}
-							}
-						});
+        				if (channel[channel.length-1] !== " ") {
+        					bot.addListener('channellist', function (channel_list) {
+        						for (var key in channel_list) {
+  									if (channel_list.hasOwnProperty(key)) {
+										if (channel_list[key]["name"] == channel[channel.length-1]) {
+											// console.log("1");
+    										bot.join(channel[channel.length-1]);
+    										bot.say(channel[channel.length-1], "DoorStatus is: " + door_status);
+										}
+  									}
+								}
+							});
+						}else{
+							bot.say(from, "DoorStatus is: " + door_status);
+						};
         			}else{
         				bot.join(to);
     					bot.say(to, "DoorStatus is: " + door_status);
@@ -150,6 +141,6 @@ module.exports = {
 		})
 	},
 	ircNick: function() {
-		bot.send('nick', 'DoorBot'); 
+		bot.send('nick', 'NordlabBot'); 
 	}
 };
