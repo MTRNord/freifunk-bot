@@ -43,6 +43,12 @@
       "target": "from"
     },
     {
+      "keyword": "bug",
+      "message": "You have found an bug? :O Send it right now to https://github.com/MTRNord/nordlab-hackerspace-door/issues",
+      "argument": "0",
+      "target": "from"
+    },
+    {
       "keyword": "klassiker",
       "message": "Für mehr oder weniger hilfreiche Kommentare den klassiker fragen.",
       "argument": "0",
