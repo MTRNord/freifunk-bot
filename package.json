@@ -24,7 +24,8 @@
     "curlrequest": "*",
     "irc": "0.4.0",
     "simple-git": "*",
-    "node-schedule": "*"
+    "node-schedule": "*",
+    "yargs": "*"
   },
   "preferGlobal": false,
   "private": true,
