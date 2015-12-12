@@ -15,6 +15,7 @@ function sleep(milliseconds) {
     }
   }
 }
+console.log("Starting up...");
 var door_status2 = "1";
 irc.ircPreload();
 function MakePush(){
@@ -73,6 +74,13 @@ if (!argv.noupdate) {
         require('child_process').exec('npm restart');
       }
     });
+  });
+}
+if (argv.noupdate) {
+  var j = schedule.scheduleJob('* 2 * * *', function(){
+    console.log('Daily Restart!');
+    bot.ircEndCustom('Daily Restart! Coming back in a few Senconds!');
+    require('child_process').exec('npm restart');
   });
 }
 setTimeout(function() { MakePush(); }, 20000);

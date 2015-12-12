@@ -2,13 +2,13 @@
   "commands": [
     {
       "keyword": "help",
-      "message": "Here is your Help!\nCommand List:\n- !help - Shows this page.\n- !DoorStatus - Shows the actual Door Status in an PM\n- !DoorStatus channel - Shows the actual Door Status in the channel drom where it was run\n- !where - Shows the address of the Nordlab e.V.\n- !who - Shows who is allowed to come to the Nordlab e.V.\n- !when - Shows who the Nordlab e.V. Hackerspace usually is open",
+      "message": "Here is your Help!\nCommand List:\n- !help - Shows this page.\n- !DoorStatus - Shows the actual Door Status in an PM\n- !DoorStatus channel - Shows the actual Door Status in the channel drom where it was run\n- !where - Shows the address of the Nordlab e.V.\n- !who - Shows who is allowed to come to the Nordlab e.V.\n- !when - Shows who the Nordlab e.V. Hackerspace usually is open\n- !source - Shows where the source of this bot is.\n- !license - What is the license of the bot?????????",
       "argument": "1",
       "target": "from"
     },
     {
       "keyword": "hilfe",
-      "message": "Hier ist die Hilfe!\nBefehl-liste:\n- !hilfe - Zeigt diese Seite.\n- !DoorStatus - Sendet eine PM mit dem aktuellen Status\n- !DoorStatus channel - Sendet in den Channel wo der Befehl ausgeführt wurde den aktuellen Status\n- !where - Zeigt die Addresse vom Nordlab e.V.\n- !who - Zeigt wer alles kommen darf Nordlab e.V.\n- !when - Zeigt wann der Nordlab e.V. Hackerspace geöffnet hat",
+      "message": "Hier ist die Hilfe!\nBefehl-liste:\n- !hilfe - Zeigt diese Seite.\n- !DoorStatus - Sendet eine PM mit dem aktuellen Status\n- !DoorStatus channel - Sendet in den Channel wo der Befehl ausgeführt wurde den aktuellen Status\n- !where - Zeigt die Addresse vom Nordlab e.V.\n- !who - Zeigt wer alles kommen darf Nordlab e.V.\n- !when - Zeigt wann der Nordlab e.V. Hackerspace geöffnet hat\n- !source - Zeigt wo die Source des Bot's sind.\n- !license - HILFE! Welche Lizenz hat der Bot?????????",
       "argument": "1",
       "target": "from"
     },
