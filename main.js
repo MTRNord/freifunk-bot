@@ -46,11 +46,11 @@ request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, re
       var rl = require("readline").createInterface({
         input: process.stdin,
         output: process.stdout
-      });
+      }).setMaxListeners(0);
 
       rl.on("SIGINT", function () {
         process.emit("SIGINT");
-      });
+      }).setMaxListeners(0);
     }
 
     process.on("SIGINT", function () {
