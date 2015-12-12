@@ -25,3 +25,7 @@ Commands
 ```!afk``` - Send in the actual channel that you are A(way) F(rom) K(eyboard)<br>
 ```!alone``` - Send in the actual channel that you are Alone in the channel<br>
 ```!freifunk``` - Send in the actual channel a link with an Meme about Freifunk<br>
+
+Updates
+=======
+The Bot pulls the repo every day at 2am (if not deativated) and restarts the bot. So it is always UpTo-Date :)<br>
