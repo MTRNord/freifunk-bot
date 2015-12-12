@@ -9,6 +9,9 @@ var bot = new irc.Client('irc.lugfl.de', 'NordlabBot', {
 var request = require('request');
 var command_config = require("../commands.json");
 module.exports = {
+	ircEndCustom: function (meassage){
+		bot.disconnect(meassage);
+	},
 	ircPreload: function (){
 		bot.addListener('error', function(message) {
     		setTimeout(function() { 

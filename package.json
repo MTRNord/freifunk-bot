@@ -22,7 +22,9 @@
   "dependencies": {
     "request": "*",
     "curlrequest": "*",
-    "irc": "0.4.0"
+    "irc": "0.4.0",
+    "simple-git": "*",
+    "node-schedule": "*"
   },
   "preferGlobal": false,
   "private": true,

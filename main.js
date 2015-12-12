@@ -1,4 +1,6 @@
 var request = require('request');
+var git = require('simple-git');
+var schedule = require('node-schedule');
 //LOAD MODULES DOWN HERE
 var pushbullet = require('./handlers/pushbullet.js');
 var irc = require('./handlers/irc.js');
@@ -61,4 +63,13 @@ request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, re
 }).setMaxListeners(0);
 }
 irc.ircBotCommands();
+var j = schedule.scheduleJob('* 2 * * *', function(){
+  console.log('Start Update!');
+  bot.ircEndCustom('Start Update! Coming back in a few Senconds!');
+  git.pull(function(err, update) {
+    if(update && update.summary.changes) {
+      require('child_process').exec('npm restart');
+    }
+  });
+});
 setTimeout(function() { MakePush(); }, 20000);
