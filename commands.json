@@ -67,6 +67,12 @@
       "message": " is now alone.",
       "argument": "0",
       "target": "to"
+    },
+    {
+      "keyword": "freifunk",
+      "message": "http://memegen.link/buzz/freifunk/everywhere.-the-dream.jpg",
+      "argument": "0",
+      "target": "to"
     }
   ]
 }
