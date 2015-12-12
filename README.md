@@ -16,7 +16,7 @@ Commands
 ========
 ```!help | !hilfe``` - Lists all commands in a PM<br>
 ```!doorstatus``` - Send an PM with the actual Door Status<br>
-```!doorstatus [arg]``` - If the arg is <b>"this"</b>) it sends in the actual channel the Door Status or is there an <b>existing channel as argument<b/> it sends to the channel which is the argument<br>
+```!doorstatus [arg]``` - If the arg is <b>"this"</b>) it sends in the actual channel the Door Status or is there an <b>existing channel as argument</b> it sends to the channel which is the argument<br>
 ```!where``` - Send an PM with the address of the Hackerspace<br>
 ```!who``` - Send an PM with information about who can go to the Hackerspace<br>
 ```!when``` - Send an PM with information about when the Hackerspace usually is open<br>
