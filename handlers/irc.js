@@ -40,6 +40,17 @@ module.exports = {
     		bot.disconnect('Bot was stopped!');
     	},
     	ircBotCommands: function() {
+    		// Will remove all falsy values: undefined, null, 0, false, NaN and "" (empty string)
+    		function cleanArray(actual) {
+    			var newArray = new Array();
+    			for (var i = 0; i < actual.length; i++) {
+    				if (actual[i]) {
+    					newArray.push(actual[i]);
+    				}
+    			}
+    			return newArray;
+    		}
+
     		bot.addListener('message', function (from, to, message) {
     			message = message.toLowerCase();
     			for (var key in command_config["commands"]) {
@@ -47,58 +58,60 @@ module.exports = {
   					// console.log("!" + JSON.stringify(command_config["commands"][key]["keyword"]));
   					if (message == ("!" + command_config["commands"][key]["keyword"])) {
   						if (command_config["commands"][key]["before"] == "from") {
-	  						if (command_config["commands"][key]["target"] == "from") {
-	  							bot.say(from, from + command_config["commands"][key]["message"]);
-	  						} else {
-	  							bot.say(to, from + command_config["commands"][key]["message"]);
-	  						}
-	  					} else {
-	  						if (!command_config["commands"][key]["before"]) {
-	  							if (command_config["commands"][key]["target"] == "from") {
-	  								bot.say(from, command_config["commands"][key]["message"]);
-	  							} else {
-	  								bot.say(to, command_config["commands"][key]["message"]);
-	  							}
-	  						} else {
-	  							if (command_config["commands"][key]["target"] == "from") {
-	  								bot.say(from, to + command_config["commands"][key]["message"]);
-	  							} else {
-	  								bot.say(to, to + command_config["commands"][key]["message"]);
-	  							}
-	  						}
-	  					}
-	  				}
-	  			}
-	  		}
-	  		var channel = message.split(" ");
-	  		if (message == "!source " + channel[channel.length-1]) {
-	  			if (channel[channel.length-1] == "this") {
-	  				bot.join(to);
-	        			bot.say(to, "You can find the Source of this bot at https://github.com/MTRNord/nordlab-hackerspace-door");
-	        		}
-	  		}
-	  		if (message == "!doorstatus") {
-	  			request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
-	  				if (!error && response.statusCode == 200) {
-	  					door_status = body;
+  							if (command_config["commands"][key]["target"] == "from") {
+  								bot.say(from, from + command_config["commands"][key]["message"]);
+  							} else {
+  								bot.say(to, from + command_config["commands"][key]["message"]);
+  							}
+  						} else {
+  							if (!command_config["commands"][key]["before"]) {
+  								if (command_config["commands"][key]["target"] == "from") {
+  									bot.say(from, command_config["commands"][key]["message"]);
+  								} else {
+  									bot.say(to, command_config["commands"][key]["message"]);
+  								}
+  							} else {
+  								if (command_config["commands"][key]["target"] == "from") {
+  									bot.say(from, to + command_config["commands"][key]["message"]);
+  								} else {
+  									bot.say(to, to + command_config["commands"][key]["message"]);
+  								}
+  							}
+  						}
+  					}
+  				}
+  			}
+  			var channel = message.split(" ");
+  			channel = cleanArray(channel);
+  			if (channel[0] + " " + channel[1] == "!source this") {
+  				console.log("!source " + channel[1]);
+  				if (channel[1] == "this") {
+  					bot.join(to);
+  					bot.say(to, "You can find the Source of this bot at https://github.com/MTRNord/nordlab-hackerspace-door");
+  				}
+  			}
+  			if (message == "!doorstatus") {
+  				request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
+  					if (!error && response.statusCode == 200) {
+  						door_status = body;
 	      				//console.log(body);
-	      				} else {
-	      					door_status = error;
+	      			} else {
+	      				door_status = error;
 	      					//console.log(error);
 	      				}
-			      		if (door_status == "geschlossen") {
-			      			door_status = "closed";
-			      		} else {
-			      			door_status = "open";
-			      		}
+	      				if (door_status == "geschlossen") {
+	      					door_status = "closed";
+	      				} else {
+	      					door_status = "open";
+	      				}
 			    		// console.log(from + ' => ' + to + ': ' + message);
 			    		bot.say(from, "DoorStatus is: " + door_status);
-	    			}).setMaxListeners(0);
-	  		}
-	  		if (message == "!doorstatus " + channel[channel.length-1]) {
-	  			request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
-	  				if (!error && response.statusCode == 200) {
-	  					door_status = body;
+			    	}).setMaxListeners(0);
+  			}
+  			if (channel[0] + " " + channel[1] == "!doorstatus this") {
+  				request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
+  					if (!error && response.statusCode == 200) {
+  						door_status = body;
 	      					//console.log(body);
 	      				} else {
 	      					door_status = error;
@@ -113,15 +126,15 @@ module.exports = {
 	        			bot.list();
 	        			// console.log(channel[(channel.length-(channel.length-1))+1]);
 	        			// console.log(channel.length);
-	        			if (channel[channel.length-1] !== "this") {
-	        				if (channel[channel.length-1] !== " ") {
+	        			if (channel[1] !== "this") {
+	        				if (channel[1] !== " ") {
 	        					bot.addListener('channellist', function (channel_list) {
 	        						for (var key in channel_list) {
 	        							if (channel_list.hasOwnProperty(key)) {
-	        								if (channel_list[key]["name"] == channel[channel.length-1]) {
+	        								if (channel_list[key]["name"] == channel[1]) {
 											// console.log("1");
-											bot.join(channel[channel.length-1]);
-											bot.say(channel[channel.length-1], "DoorStatus is: " + door_status);
+											bot.join(channel[1]);
+											bot.say(channel[1], "DoorStatus is: " + door_status);
 										}
 									}
 								}
@@ -134,9 +147,9 @@ module.exports = {
 	        				bot.say(to, "DoorStatus is: " + door_status);
 	        			}
 	        		}).setMaxListeners(0);
-			}
-			if (message == "!kill") {
-				if ((from == "DasNordlicht") || (from == "MTRNord")) {
+}
+if (message == "!kill") {
+	if ((from == "DasNordlicht") || (from == "MTRNord")) {
     					// console.log(from + ' => ' + to + ': ' + message);
     					if (process.platform === "win32") {
     						var rl = require("readline").createInterface({
@@ -149,8 +162,8 @@ module.exports = {
     				}
     			}
     		})
-	},
-	ircNick: function() {
-		bot.send('nick', 'NordlabBot'); 
-	}
+},
+ircNick: function() {
+	bot.send('nick', 'NordlabBot'); 
+}
 };
