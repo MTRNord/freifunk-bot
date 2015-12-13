@@ -2,37 +2,37 @@
   "commands": [
     {
       "keyword": "help",
-      "message": "Here is your Help!\nCommand List:\n- !help - Shows this page.\n- !DoorStatus - Shows the actual Door Status in an PM\n- !DoorStatus channel - Shows the actual Door Status in the channel drom where it was run\n- !where - Shows the address of the Nordlab e.V.\n- !who - Shows who is allowed to come to the Nordlab e.V.\n- !when - Shows who the Nordlab e.V. Hackerspace usually is open\n- !source - Shows where the source of this bot is.\n- !license - What is the license of the bot?????????",
+      "message": "Here is your Help!\nCommand List:\n- !help - Shows this page.\n- !DoorStatus - Shows the actual Door Status in an PM\n- !DoorStatus channel - Shows the actual Door Status in the channel from where it was run\n- !where - Shows the address of the Nordlab e.V.\n- !who - Shows who is allowed to come to the Nordlab e.V.\n- !when - Shows who the Nordlab e.V. Hackerspace usually is open\n- !source - Shows where the source of this bot is.\n- !license - What is the license of the bot?????????",
       "argument": "1",
       "target": "from"
     },
     {
       "keyword": "hilfe",
-      "message": "Hier ist die Hilfe!\nBefehl-liste:\n- !hilfe - Zeigt diese Seite.\n- !DoorStatus - Sendet eine PM mit dem aktuellen Status\n- !DoorStatus channel - Sendet in den Channel wo der Befehl ausgeführt wurde den aktuellen Status\n- !where - Zeigt die Addresse vom Nordlab e.V.\n- !who - Zeigt wer alles kommen darf Nordlab e.V.\n- !when - Zeigt wann der Nordlab e.V. Hackerspace geöffnet hat\n- !source - Zeigt wo die Source des Bot's sind.\n- !license - HILFE! Welche Lizenz hat der Bot?????????",
+      "message": "Hier ist die Hilfe!\nBefehl-Liste:\n- !hilfe - Zeigt diese Seite an.\n- !DoorStatus - Sendet eine PM mit dem aktuellen Status\n- !DoorStatus channel - Sendet in den Channel wo der Befehl ausgeführt wurde den aktuellen Status\n- !where - Zeigt die Addresse vom Nordlab e.V.\n- !who - Zeigt wer alles in den Nordlab e.V. kommen darf\n- !when - Zeigt wann der Nordlab e.V. Hackerspace geöffnet hat\n- !source - Zeigt wo die Sourcen des Bot's sind.\n- !license - HILFE! Welche Lizenz hat der Bot?????????",
       "argument": "1",
       "target": "from"
     },
     {
       "keyword": "where",
-      "message": "You can find the Hackerspace in:\nOffener Kanal Flensburg\nSt.-Jürgen-Straße 95\n24937 Flensburg\nAt the very Top of the building",
+      "message": "You can find the Hackerspace in:\nOffener Kanal Flensburg\nSt.-Jürgen-Straße 95\n24937 Flensburg\nAt the very top of the building",
       "argument": "0",
       "target": "from"
     },
     {
       "keyword": "who",
-      "message": "Everybody can come to the Norlab e.V.",
+      "message": "Everybody can come to the Nordlab e.V.",
       "argument": "0",
       "target": "from"
     },
     {
       "keyword": "when",
-      "message": "The Hackerpace of Norlab e.V. is usually opened every Monday at 6pm o'clock.",
+      "message": "The Hackerpace of Nordlab e.V. is usually opened every Monday at 6pm o'clock.",
       "argument": "0",
       "target": "from"
     },
     {
       "keyword": "source",
-      "message": "You can find the Source of this bot at https://github.com/MTRNord/nordlab-hackerspace-door",
+      "message": "You can find the source of this bot at https://github.com/MTRNord/nordlab-hackerspace-door",
       "argument": "0",
       "target": "from"
     },
