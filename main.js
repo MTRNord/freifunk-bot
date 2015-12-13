@@ -2,6 +2,7 @@ var request = require('request');
 var git = require('simple-git');
 var schedule = require('node-schedule');
 var argv = require('yargs').argv;
+var fs = require('fs');
 //LOAD MODULES DOWN HERE
 var pushbullet = require('./handlers/pushbullet.js');
 var irc = require('./handlers/irc.js');
@@ -71,19 +72,37 @@ irc.ircBotCommands();
 if (!argv.noupdate) {
   var j = schedule.scheduleJob('* 2 * * *', function(){
     console.log('Start Update!');
-    bot.ircEndCustom('Start update! Coming back in a few Seconds!');
-    git.pull(function(err, update) {
-      if(update && update.summary.changes) {
+    irc.ircEndCustom('Start update! Coming back in a few Seconds!');
+    git.pull("origin", "master", function(err, update) {
+      if(update && update.summary.changes && fs.readFile("tmp/restart") !== "1") {
         require('child_process').exec('npm restart');
       }
     });
+    fs.writeFile("tmp/restart", "1", function(err) {
+      if(err) {
+          return console.log(err);
+      }
+
+      console.log("The file was saved!");
+    }); 
   });
 }
 if (argv.noupdate) {
-  var j = schedule.scheduleJob('* 2 * * *', function(){
+  var k = schedule.scheduleJob('* 2 * * *', function(){
     console.log('Daily restart!');
-    bot.ircEndCustom('Daily restart! Coming back in a few Seconds!');
-    require('child_process').exec('npm restart');
+    irc.ircEndCustom('Daily restart! Coming back in a few Seconds!');
+    if (fs.readFile("tmp/restart") !== "1") {
+      require('child_process').exec('npm restart');
+    }
   });
 }
+var l = schedule.scheduleJob('* 3 * * *', function(){
+  fs.writeFile("tmp/restart", "0", function(err) {
+    if(err) {
+      return console.log(err);
+    }
+
+    console.log("The file was saved!");
+  }); 
+});
 setTimeout(function() { MakePush(); }, 20000);
