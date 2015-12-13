@@ -74,7 +74,8 @@ if (!argv.noupdate) {
     console.log('Start Update!');
     irc.ircEndCustom('Start update! Coming back in a few Seconds!');
     git.pull("origin", "master", function(err, update) {
-      if(update && update.summary.changes && fs.readFile("tmp/restart") !== "1") {
+      var restartFile = fs.readFileSync("tmp/restart", "utf8");
+      if(update && update.summary.changes && restartFile !== "1") {
         require('child_process').exec('npm restart');
       }
     });
@@ -91,9 +92,17 @@ if (argv.noupdate) {
   var k = schedule.scheduleJob('* 2 * * *', function(){
     console.log('Daily restart!');
     irc.ircEndCustom('Daily restart! Coming back in a few Seconds!');
-    if (fs.readFile("tmp/restart") !== "1") {
+    var restartFile = fs.readFileSync("tmp/restart", "utf8");
+    console.log(restartFile);
+    if (restartFile !== "1") {
       require('child_process').exec('npm restart');
     }
+    fs.writeFile("tmp/restart", "1", function(err) {
+      if(err) {
+        return console.log(err);
+      }
+      console.log("The file was saved!");
+    }); 
   });
 }
 var l = schedule.scheduleJob('* 3 * * *', function(){
@@ -103,6 +112,6 @@ var l = schedule.scheduleJob('* 3 * * *', function(){
     }
 
     console.log("The file was saved!");
-  }); 
+  });
 });
 setTimeout(function() { MakePush(); }, 20000);
