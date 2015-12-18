@@ -3,7 +3,7 @@ var git = require('simple-git');
 var schedule = require('node-schedule');
 var argv = require('yargs').argv;
 var fs = require('fs');
-var params_config = require("../configs/params.json");
+var params_config = require("./configs/params.json");
 var autoupdate = params_config["autoupdate"];
 
 //LOAD MODULES DOWN HERE
