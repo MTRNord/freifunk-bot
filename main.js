@@ -3,6 +3,9 @@ var git = require('simple-git');
 var schedule = require('node-schedule');
 var argv = require('yargs').argv;
 var fs = require('fs');
+var params_config = require("../configs/params.json");
+var autoupdate = params_config["autoupdate"];
+
 //LOAD MODULES DOWN HERE
 var pushbullet = require('./handlers/pushbullet.js');
 var irc = require('./handlers/irc.js');
@@ -60,20 +63,21 @@ request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, re
 }).setMaxListeners(0);
 }
 irc.ircBotCommands();
-if (!argv.noupdate) {
+if (!argv.noupdate && autoupdate == 1) {
   var j = schedule.scheduleJob('59 2 * * *', function(){
     git.pull("origin", "master", function(err, update) {
       if(update && update.summary.changes) {
         console.log('Start Update!');
+
+        console.log('Daily restart!');
         irc.ircEndCustom('Start update! Coming back in a few Seconds!');
         require('child_process').exec('npm restart');
       }
     });
   });
 }
-if (argv.noupdate) {
+if ((argv.noupdate) || (autoupdate == 0)) {
   var k = schedule.scheduleJob('59 2 * * *', function(){
-    console.log(restartFile);
     console.log('Daily restart!');
     irc.ircEndCustom('Daily restart! Coming back in a few Seconds!');
     require('child_process').exec('npm restart');
