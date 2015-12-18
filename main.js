@@ -25,22 +25,24 @@ request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, re
       door_status = error;
       //console.log(error);
     }
-    // console.log("Current Real State:" + door_status + "\n");
-    // console.log("Current Last State:" + door_status2 + "\n");
-    // console.log("Next Check!");
-    if (door_status2 !== door_status){
-      if (door_status2 !== "1") {
-        door_status2 = door_status;
-        if (door_status == "geschlossen"){
-          door_status = "closed";
+    if (!error && response.statusCode == 200) {
+      // console.log("Current Real State:" + door_status + "\n");
+      // console.log("Current Last State:" + door_status2 + "\n");
+      // console.log("Next Check!");
+      if (door_status2 !== door_status){
+        if (door_status2 !== "1") {
+          door_status2 = door_status;
+          if (door_status == "geschlossen"){
+            door_status = "closed";
+          }else{
+            door_status = "open";
+          }
+          //ADD MODULE RUNTIMES DOWN HERE
+          pushbullet.pushbulletSend(door_status);
+          irc.ircSend(door_status);
         }else{
-          door_status = "open";
+          door_status2 = door_status;
         }
-        //ADD MODULE RUNTIMES DOWN HERE
-        pushbullet.pushbulletSend(door_status);
-        irc.ircSend(door_status);
-      }else{
-        door_status2 = door_status;
       }
     }
     // console.log("WAIT!");

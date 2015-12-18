@@ -38,7 +38,7 @@ for (var key in params_config["servers"]) {
     }
     if (active == 1) {
       var bot = new irc.Client(serveraddress, botname, {
-        debug: false,
+        debug: debug,
         channels: [main_channel],
         autoRejoin: false,
         autoConnect: false,
