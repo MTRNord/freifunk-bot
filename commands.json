@@ -50,7 +50,7 @@
     },
     {
       "keyword": "klassiker",
-      "message": "Für mehr oder weniger hilfreiche Kommentare den klassiker fragen.",
+      "message": "Für mehr oder weniger hilfreiche Kommentare den klassiker fragen und wenn er mal nicht reagiert ist er damit beschäftigt dem MTRNord damit zu queälen seinen realnamen nicht zu sagen. :( <-- sad MTRNord face.",
       "argument": "0",
       "target": "to"
     },
@@ -79,6 +79,12 @@
       "message": "http://memegen.link/buzz/freifunk/everywhere.-the-dream.jpg",
       "argument": "0",
       "target": "to"
+    },
+    {
+      "keyword": "todo",
+      "message": "- Add config\n-- Add ability to do multiple server connections\n- Add SSH Admin Control Server for editing the bot easily",
+      "argument": "0",
+      "target": "from"
     }
   ]
 }

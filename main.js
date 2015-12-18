@@ -10,15 +10,6 @@ var irc = require('./handlers/irc.js');
 //Constants
 var SIGINT = "SIGINT";
 
-
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
 console.log("Starting up...");
 var door_status2 = "1";
 irc.ircPreload();
@@ -70,48 +61,22 @@ request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, re
 }
 irc.ircBotCommands();
 if (!argv.noupdate) {
-  var j = schedule.scheduleJob('* 2 * * *', function(){
-    console.log('Start Update!');
-    irc.ircEndCustom('Start update! Coming back in a few Seconds!');
+  var j = schedule.scheduleJob('59 2 * * *', function(){
     git.pull("origin", "master", function(err, update) {
-      var restartFile = fs.readFileSync("tmp/restart", "utf8");
-      if(update && update.summary.changes && restartFile !== "1") {
+      if(update && update.summary.changes) {
+        console.log('Start Update!');
+        irc.ircEndCustom('Start update! Coming back in a few Seconds!');
         require('child_process').exec('npm restart');
       }
     });
-    fs.writeFile("tmp/restart", "1", function(err) {
-      if(err) {
-          return console.log(err);
-      }
-
-      console.log("The file was saved!");
-    }); 
   });
 }
 if (argv.noupdate) {
-  var k = schedule.scheduleJob('* 2 * * *', function(){
+  var k = schedule.scheduleJob('59 2 * * *', function(){
+    console.log(restartFile);
     console.log('Daily restart!');
     irc.ircEndCustom('Daily restart! Coming back in a few Seconds!');
-    var restartFile = fs.readFileSync("tmp/restart", "utf8");
-    console.log(restartFile);
-    if (restartFile !== "1") {
-      require('child_process').exec('npm restart');
-    }
-    fs.writeFile("tmp/restart", "1", function(err) {
-      if(err) {
-        return console.log(err);
-      }
-      console.log("The file was saved!");
-    }); 
+    require('child_process').exec('npm restart');
   });
 }
-var l = schedule.scheduleJob('* 3 * * *', function(){
-  fs.writeFile("tmp/restart", "0", function(err) {
-    if(err) {
-      return console.log(err);
-    }
-
-    console.log("The file was saved!");
-  });
-});
 setTimeout(function() { MakePush(); }, 20000);
