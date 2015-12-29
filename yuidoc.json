@@ -1,0 +1,11 @@
+{
+    "name": "Nordlab Hackerspace Door",
+    "description": "Modular parser for the hackerspace door status with handlers for multiple services",
+    "version": "0.0.2",
+    "url": "http://example.com/",
+    "options": {
+        "outdir": "./apidocs",
+        "ignorePaths": [ "node_modules", "apidocs", "configs" ],
+        "paths": "*"
+    }
+}

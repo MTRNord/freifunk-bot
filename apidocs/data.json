@@ -1,0 +1,103 @@
+{
+    "project": {
+        "name": "Nordlab Hackerspace Door",
+        "description": "Modular parser for the hackerspace door status with handlers for multiple services",
+        "version": "0.0.2",
+        "url": "http://example.com/"
+    },
+    "files": {
+        "main.js": {
+            "name": "main.js",
+            "modules": {
+                "Main": 1
+            },
+            "classes": {
+                "GetData": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "Main": {
+            "name": "Main",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "GetData": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "main.js",
+            "line": 29,
+            "description": "Main-functionality for handling the Modules :)",
+            "itemtype": "main",
+            "author": "Marcel Radzio"
+        }
+    },
+    "classes": {
+        "GetData": {
+            "name": "GetData",
+            "shortname": "GetData",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Main",
+            "namespace": "",
+            "file": "main.js",
+            "line": 29,
+            "description": "Get door-status from the Web",
+            "return": {
+                "description": "Door Status",
+                "type": "String"
+            }
+        }
+    },
+    "elements": {},
+    "classitems": [
+        {
+            "file": "main.js",
+            "line": 36,
+            "description": "Actual pulled Door Status",
+            "itemtype": "property",
+            "name": "door_status",
+            "type": "String",
+            "class": "GetData",
+            "module": "Main"
+        },
+        {
+            "file": "main.js",
+            "line": 44,
+            "description": "Content of status_page",
+            "itemtype": "property",
+            "name": "body",
+            "type": "String",
+            "class": "GetData",
+            "module": "Main"
+        },
+        {
+            "file": "main.js",
+            "line": 52,
+            "description": "Fired when an error occurs...",
+            "itemtype": "property",
+            "name": "error",
+            "type": "String",
+            "class": "GetData",
+            "module": "Main"
+        },
+        {
+            "file": "main.js",
+            "line": 66,
+            "description": "Save Old Door Status",
+            "itemtype": "property",
+            "name": "door_status2",
+            "type": "String",
+            "class": "GetData",
+            "module": "Main"
+        }
+    ],
+    "warnings": []
+}

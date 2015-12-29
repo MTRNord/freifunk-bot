@@ -1,6 +1,6 @@
 {
   "name": "nordlab-hackerspace-door",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Modular parser for the hackerspace door status with handlers for multiple services",
   "author": "Marcel Radzio <info@nordgedanken.de>",
   "scripts": {
@@ -29,6 +29,8 @@
   },
   "preferGlobal": false,
   "private": true,
-  "license": "SEE LICENSE IN LICENSE.md"
+  "license": "SEE LICENSE IN LICENSE.md",
+  "optionalDependencies": {
+    "yuidocjs": "^0.9.0"
+  }
 }
-  
