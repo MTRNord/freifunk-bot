@@ -1,7 +1,7 @@
 /**
  * Main-functionality for handling the Modules :)
  * 
- * @main GetData
+ * @main Main
  * @module Main
  * @author Marcel Radzio
  */
@@ -86,6 +86,7 @@ function GetData(){
         		}else{
         			//Save Last Status
           			door_status2 = door_status;
+                return door_status;
         		}
       		}
     	}
@@ -111,28 +112,40 @@ process.on(SIGINT, function () {
 //Activate IRC-Bot Command Handler
 irc.ircBotCommands();
 
-//Handle Updates
-if (!argv.noupdate && autoupdate == 1) {
-  //Run update at 3am and 59min
-  var j = schedule.scheduleJob('59 3 * * *', function(){
-    git.pull("origin", "master", function(err, update) {
-      if(update && update.summary.changes) {
-        console.log('Start Update!');
+  
+/**
+ * Update - Pull last master from Github
+ *
+ * @method update
+ */
+function update(){
+  git.pull("origin", "master", function(err, update) {
+    if(update && update.summary.changes) {
+      console.log('Start Update!');
+      restart();
+    }
+  });
+}
 
-        console.log('Daily restart!');
-        irc.ircEndCustom('Start update! Coming back in a few Seconds!');
-        require('child_process').exec('npm restart');
-      }
-    });
-  });
+/**
+ * Restart - Restart the Bot completly
+ *
+ * @method restart
+ */
+function restart(){
+  console.log('Daily restart!');
+  irc.ircEndCustom('Restart! Coming back in a few Seconds!');
+  require('child_process').exec('npm restart');
 }
-if ((argv.noupdate) || (autoupdate == 0)) {
-  //Run restart at 3am and 59min if update is disabled on Start
-  var k = schedule.scheduleJob('59 3 * * *', function(){
-    console.log('Daily restart!');
-    irc.ircEndCustom('Daily restart! Coming back in a few Seconds!');
-    require('child_process').exec('npm restart');
-  });
-}
+
+var j = schedule.scheduleJob('59 3 * * *', function(){
+  if (!argv.noupdate && autoupdate == 1) {
+    //Run update at 3am and 59min
+    update();
+  }else{
+    restart();
+  }
+});
+
 //Run Mainfunction 20seconds after script start
 setTimeout(function() { GetData(); }, 20000);
