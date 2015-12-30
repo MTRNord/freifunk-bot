@@ -9,7 +9,7 @@
       "main_channel": "#hackerspace",
       "nickserv_pass": "NordlabBotPass",
       "active": 1,
-      "debug": 1
+      "debug": 0
     }
   ]
 }

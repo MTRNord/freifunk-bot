@@ -85,6 +85,12 @@
       "message": "- Add ability to do multiple server connections\n- Add SSH Admin Control Server for editing the bot easily",
       "argument": "0",
       "target": "from"
+    },
+    {
+      "keyword": "xmas",
+      "message": "Der NordlabBot wünscht euch allen eine frohe und besinliche Weihnachtszeit :)",
+      "argument": "0",
+      "target": "to"
     }
   ]
 }

@@ -66,7 +66,7 @@ request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, re
 }
 irc.ircBotCommands();
 if (!argv.noupdate && autoupdate == 1) {
-  var j = schedule.scheduleJob('59 2 * * *', function(){
+  var j = schedule.scheduleJob('59 3 * * *', function(){
     git.pull("origin", "master", function(err, update) {
       if(update && update.summary.changes) {
         console.log('Start Update!');
@@ -79,7 +79,7 @@ if (!argv.noupdate && autoupdate == 1) {
   });
 }
 if ((argv.noupdate) || (autoupdate == 0)) {
-  var k = schedule.scheduleJob('59 2 * * *', function(){
+  var k = schedule.scheduleJob('59 3 * * *', function(){
     console.log('Daily restart!');
     irc.ircEndCustom('Daily restart! Coming back in a few Seconds!');
     require('child_process').exec('npm restart');
