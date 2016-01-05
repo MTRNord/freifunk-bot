@@ -20,15 +20,14 @@
     "notification"
   ],
   "dependencies": {
-    "request": "*",
-    "curlrequest": "*",
-    "irc": "0.4.0",
-    "simple-git": "*",
-    "node-schedule": "*",
-    "yargs": "*"
+    "curlrequest": "^0.5.4",
+    "irc": "^0.4.0",
+    "node-schedule": "^0.6.0",
+    "request": "^2.67.0",
+    "simple-git": "^1.21.0",
+    "yargs": "^3.31.0"
   },
   "preferGlobal": false,
   "private": true,
   "license": "SEE LICENSE IN LICENSE.md"
 }
-  
