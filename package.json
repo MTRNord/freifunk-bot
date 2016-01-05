@@ -30,8 +30,6 @@
     "simple-git": "^1.21.0",
     "yargs": "^3.31.0"
   },
-  "preferGlobal": false,
-  "private": false,
   "license": "SEE LICENSE IN LICENSE.md",
   "devDependencies": {
     "semantic-release": "^4.3.5"
