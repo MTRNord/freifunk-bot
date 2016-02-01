@@ -25,7 +25,7 @@
   "dependencies": {
     "curlrequest": "^0.5.4",
     "irc": "^0.4.0",
-    "node-schedule": "^0.6.0",
+    "node-schedule": "^1.0.0",
     "request": "^2.67.0",
     "simple-git": "^1.21.0",
     "yargs": "^3.31.0"
