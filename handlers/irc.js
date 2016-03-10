@@ -84,6 +84,7 @@ for (var key in params_config["servers"]) {
     clients.push(bot[key]);
   }
 }
+
 function addListener(event, callback) {
   clients.forEach(function(client) {
     client.addListener(event, callback);
@@ -177,7 +178,7 @@ module.exports = {
           			join(main_channel);
         		}
       		}
-			say(main_channel, 'Door Bot is starting to watch on the Door Status');
+			//say(main_channel, 'Door Bot is starting to watch on the Door Status');
 		})
 	},
 	/**
