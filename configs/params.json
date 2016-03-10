@@ -1,5 +1,5 @@
 {
-  "botname": "NordlabBot",
+  "botname": "FreifunkBot",
   "autoupdate": 1,
   "disconnect_meassage": "Bot was stopped!",
   "servers": [
@@ -7,7 +7,15 @@
       "servername": "Lugfl",
       "serveraddress": "irc.lugfl.de",
       "main_channel": "#hackerspace",
-      "nickserv_pass": "NordlabBotPass",
+      "nickserv_pass": "FreifunkBotPass",
+      "active": 1,
+      "debug": 0
+    },
+    {
+      "servername": "Hackint",
+      "serveraddress": "irc.hackint.org",
+      "main_channel": "#ffnord",
+      "nickserv_pass": "FreifunkBotPass",
       "active": 1,
       "debug": 0
     }

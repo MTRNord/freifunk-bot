@@ -1,6 +1,6 @@
 /**
  * IRC-ChatBot Module
- * 
+ *
  * @module Main
  * @class irc
  * @submodule irc
@@ -53,7 +53,8 @@ for (var key in params_config["servers"]) {
   }
 }
 */
-
+var clients = [];
+var bot = [];
 for (var key in params_config["servers"]) {
   if (params_config["servers"].hasOwnProperty(key)) {
     var serveraddress = params_config["servers"][key]["serveraddress"];
@@ -70,17 +71,52 @@ for (var key in params_config["servers"]) {
       console.log = function(){};
     }
     if (active == 1) {
-      var bot = new irc.Client(serveraddress, botname, {
+      bot[key] = new irc.Client(serveraddress, botname, {
         debug: debug,
-        channels: [main_channel, "#freifunk-flensburg"],
+        channels: [main_channel],
         autoRejoin: true,
         autoConnect: false,
-        messageSplit: 1000000
+        messageSplit: 1000000,
+        floodProtection: true,
+        floodProtectionDelay: 1000,
       });
     }
+    clients.push(bot[key]);
   }
 }
+function addListener(event, callback) {
+  clients.forEach(function(client) {
+    client.addListener(event, callback);
+  });
+}
+function join(event, callback) {
+  clients.forEach(function(client) {
+    client.join(event, callback);
+  });
+}
+function disconnect(event, callback) {
+  clients.forEach(function(client) {
+    client.disconnect(event, callback);
+  });
+}
 
+function connect(event, callback) {
+  clients.forEach(function(client) {
+    client.connect(event, callback);
+  });
+}
+
+function send(event, callback) {
+  clients.forEach(function(client) {
+    client.send(event, callback);
+  });
+}
+
+function say(event, callback) {
+  clients.forEach(function(client) {
+    client.say(event, callback);
+  });
+}
 module.exports = {
 	/**
  	* Stops Bot with custom meassage
@@ -89,7 +125,7 @@ module.exports = {
  	* @constructor
 	*/
 	ircEndCustom: function (meassage) {
-		bot.disconnect(meassage);
+		disconnect(meassage);
 	},
 	/**
  	* Connects to Server, logs in to NickServ, sets Name
@@ -97,12 +133,12 @@ module.exports = {
  	* @method ircPreload
 	*/
 	ircPreload: function () {
-		bot.addListener('error', function(message) {
-			setTimeout(function() { 
-    			console.log("wait 7sek"); 
+		addListener('error', function(message) {
+			setTimeout(function() {
+    			console.log("wait 7sek");
     		}, 7000);
 
-			bot.send('nick', botname); 
+			send('nick', botname);
       		for (var key in params_config["servers"]) {
         		if (params_config["servers"].hasOwnProperty(key)) {
         			/**
@@ -112,15 +148,15 @@ module.exports = {
     				 * @type String
    					 */
           			var nickserv_pass = params_config["servers"][key]["nickserv_pass"];
-          			bot.say('NickServ', 'identify ' + nickserv_pass);
+          			say('NickServ', 'identify ' + nickserv_pass);
         		}
       		}
 		});
-		setTimeout(function() { 
-			console.log("wait 7sek"); 
+		setTimeout(function() {
+			console.log("wait 7sek");
 		}, 7000);
-		bot.connect(10, function() {
-			bot.send('nick', botname);
+		connect(10, function() {
+			send('nick', botname);
 			for (var key in params_config["servers"]) {
         		if (params_config["servers"].hasOwnProperty(key)) {
         			/**
@@ -137,11 +173,11 @@ module.exports = {
     				 * @type String
    					 */
           			var main_channel = params_config["servers"][key]["main_channel"];
-          			bot.say('NickServ', 'identify ' + nickserv_pass);
-          			bot.join(main_channel);
+          			say('NickServ', 'identify ' + nickserv_pass);
+          			join(main_channel);
         		}
       		}
-			bot.say(main_channel, 'Door Bot is starting to watch on the Door Status');
+			say(main_channel, 'Door Bot is starting to watch on the Door Status');
 		})
 	},
 	/**
@@ -160,11 +196,11 @@ module.exports = {
     			 * @type String
    				 */
         		var main_channel = params_config["servers"][key]["main_channel"];
-        		bot.say(main_channel, 'Door Status changed to: ' + door_status);
-        		bot.say("#freifunk-flensburg", 'Door Status changed to: ' + door_status);
+        		say(main_channel, 'Door Status changed to: ' + door_status);
+        		say("#freifunk-flensburg", 'Door Status changed to: ' + door_status);
       		}
     	}
-    	bot.send('topic','#hackerspace "Hackerspace Flensburg - Treffen jeden Montag 18:00 Uhr im Offenen Kanal Flensburg! - Tür Status"' + door_status);
+    	send('topic','#hackerspace "Hackerspace Flensburg - Treffen jeden Montag 18:00 Uhr im Offenen Kanal Flensburg! - Tür Status"' + door_status);
     	console.log("IRC Door Status Chnaged");
   	},
 	/**
@@ -173,7 +209,7 @@ module.exports = {
  	* @method ircStopp
 	*/
   	ircStopp: function() {
-    	bot.disconnect(disconnect_meassage);
+    	disconnect(disconnect_meassage);
   	},
 	/**
  	* Handels Commands from the Bot
@@ -192,7 +228,7 @@ module.exports = {
     		return newArray;
     	}
 
-    	bot.addListener('message', function (from, to, message) {
+    	addListener('message', function (from, to, message) {
     		/**
    			 * Recived meassage
    			 *
@@ -206,22 +242,22 @@ module.exports = {
           			if (message == ("!" + command_config["commands"][key]["keyword"])) {
             			if (command_config["commands"][key]["before"] == "from") {
   							if (command_config["commands"][key]["target"] == "from") {
-  								bot.say(from, from + command_config["commands"][key]["message"]);
+  								say(from, from + command_config["commands"][key]["message"]);
   							} else {
-  								bot.say(to, from + command_config["commands"][key]["message"]);
+  								say(to, from + command_config["commands"][key]["message"]);
   							}
   						} else {
   							if (!command_config["commands"][key]["before"]) {
   								if (command_config["commands"][key]["target"] == "from") {
-  									bot.say(from, command_config["commands"][key]["message"]);
+  									say(from, command_config["commands"][key]["message"]);
   								} else {
-  									bot.say(to, command_config["commands"][key]["message"]);
+  									say(to, command_config["commands"][key]["message"]);
   								}
   							} else {
   								if (command_config["commands"][key]["target"] == "from") {
-  									bot.say(from, to + command_config["commands"][key]["message"]);
+  									say(from, to + command_config["commands"][key]["message"]);
   								} else {
-  									bot.say(to, to + command_config["commands"][key]["message"]);
+  									say(to, to + command_config["commands"][key]["message"]);
   								}
   							}
   						}
@@ -241,8 +277,8 @@ module.exports = {
   			if (channel[0] + " " + channel[1] == "!source this") {
   				console.log("!source " + channel[1]);
   				if (channel[1] == "this") {
-  					bot.join(to);
-  					bot.say(to, "You can find the Source of this bot at https://github.com/MTRNord/nordlab-hackerspace-door");
+  					join(to);
+  					say(to, "You can find the Source of this bot at https://github.com/MTRNord/nordlab-hackerspace-door");
   				}
   			}
   			if (message == "!doorstatus") {
@@ -271,11 +307,11 @@ module.exports = {
 	      	    			door_status = "closed";
 	      	  			} else {
 	      		 			door_status = "open";
-	      	  			}	
+	      	  			}
 			     		console.log(from + ' => ' + to + ': ' + message);
-			     		bot.say(from, "DoorStatus is: " + door_status);
+			     		say(from, "DoorStatus is: " + door_status);
           			}else{
-            			bot.say(from, "DoorStatus is not availible at this time");
+            			say(from, "DoorStatus is not availible at this time");
           			}
         		}).setMaxListeners(0);
   			}
@@ -316,21 +352,21 @@ module.exports = {
                   					for (var key in channel_list) {
                     					if (channel_list.hasOwnProperty(key)) {
                       						if (channel_list[key]["name"] == channel[1]) {
-                        						bot.join(channel[1]);
-                        						bot.say(channel[1], "DoorStatus is: " + door_status);
+                        						join(channel[1]);
+                        						say(channel[1], "DoorStatus is: " + door_status);
                       						}
                     					}
 									}
                 				});
               				} else {
-                				bot.say(from, "DoorStatus is: " + door_status);
+                				say(from, "DoorStatus is: " + door_status);
               				}
             			} else {
-              				bot.join(to);
-              				bot.say(to, "DoorStatus is: " + door_status);
+              				join(to);
+              				say(to, "DoorStatus is: " + door_status);
             			}
           			}else{
-            			bot.say(from, "DoorStatus is not availible at this time");
+            			say(from, "DoorStatus is not availible at this time");
           			}
         		}).setMaxListeners(0);
       		}
@@ -342,7 +378,7 @@ module.exports = {
     						input: process.stdin,
     						output: process.stdout
     					});
-    					bot.disconnect(disconnect_meassage);
+    					disconnect(disconnect_meassage);
     					process.exit();
     				}
     			}
@@ -355,6 +391,6 @@ module.exports = {
  	* @method ircNick
 	*/
   	ircNick: function() {
-		bot.send('nick', botname); 
+		send('nick', botname);
   	}
 };
