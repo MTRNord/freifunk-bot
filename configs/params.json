@@ -1,6 +1,6 @@
 {
   "botname": "FreifunkBot",
-  "autoupdate": 1,
+  "autoupdate": 0,
   "disconnect_meassage": "Bot was stopped!",
   "servers": [
     {
