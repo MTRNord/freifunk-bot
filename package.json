@@ -20,11 +20,13 @@
     "notification"
   ],
   "dependencies": {
-    "request": "*",
     "curlrequest": "*",
     "irc": "0.4.0",
-    "simple-git": "*",
     "node-schedule": "*",
+    "request": "*",
+    "simple-git": "*",
+    "slackbots": "^0.5.1",
+    "string": "^3.3.1",
     "yargs": "*"
   },
   "preferGlobal": false,

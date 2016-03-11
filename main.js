@@ -1,6 +1,6 @@
 /**
  * Main-functionality for handling the Modules :)
- * 
+ *
  * @main Main
  * @module Main
  * @author Marcel Radzio
@@ -11,12 +11,13 @@ var git = require('simple-git');
 var schedule = require('node-schedule');
 var argv = require('yargs').argv;
 var fs = require('fs');
-var params_config = require("./configs/params.json");
+var params_config = require("./configs/ircServer.json");
 var autoupdate = params_config["autoupdate"];
 
 //LOAD MODULES DOWN HERE
 var pushbullet = require('./handlers/pushbullet.js');
 var irc = require('./handlers/irc.js');
+var slack = require('./handlers/slack.js');
 
 //Constants
 var SIGINT = "SIGINT";
@@ -25,7 +26,7 @@ var door_status2 = "1";
 //Startup
 irc.ircPreload();
 
-  
+
 /**
  * Get door-status from the Web
  *
@@ -112,7 +113,7 @@ process.on(SIGINT, function () {
 //Activate IRC-Bot Command Handler
 irc.ircBotCommands();
 
-  
+
 /**
  * Update - Pull last master from Github
  *

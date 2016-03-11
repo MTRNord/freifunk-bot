@@ -9,8 +9,9 @@
 //Load needed Features
 var irc = require('irc');
 var request = require('request');
+var S = require('string');
 var command_config = require("../configs/commands.json");
-var params_config = require("../configs/params.json");
+var params_config = require("../configs/ircServer.json");
 
 //Set Params
 /**
@@ -80,8 +81,8 @@ for (var key in params_config["servers"]) {
         floodProtection: true,
         floodProtectionDelay: 1000,
       });
+      clients.push(bot[key]);
     }
-    clients.push(bot[key]);
   }
 }
 
@@ -134,24 +135,24 @@ module.exports = {
  	* @method ircPreload
 	*/
 	ircPreload: function () {
-		addListener('error', function(message) {
-			setTimeout(function() {
-    			console.log("wait 7sek");
-    		}, 7000);
+    addListener('error', function(message) {
+      setTimeout(function() {
+        console.log("wait 7sek");
+      }, 7000);
 
-			send('nick', botname);
-      		for (var key in params_config["servers"]) {
-        		if (params_config["servers"].hasOwnProperty(key)) {
-        			/**
-   					 * Password for the NickServ
-   					 *
-    				 * @property nickserv_pass
-    				 * @type String
-   					 */
-          			var nickserv_pass = params_config["servers"][key]["nickserv_pass"];
-          			say('NickServ', 'identify ' + nickserv_pass);
-        		}
-      		}
+      send('nick', botname);
+      for (var key in params_config["servers"]) {
+        if (params_config["servers"].hasOwnProperty(key)) {
+          /**
+          * Password for the NickServ
+          *
+          * @property nickserv_pass
+          * @type String
+          */
+          var nickserv_pass = params_config["servers"][key]["nickserv_pass"];
+          say('NickServ', 'identify ' + nickserv_pass);
+        }
+      }
 		});
 		setTimeout(function() {
 			console.log("wait 7sek");
@@ -239,8 +240,7 @@ module.exports = {
     		message = message.toLowerCase();
     		for (var key in command_config["commands"]) {
     			if (command_config["commands"].hasOwnProperty(key)) {
-          			console.log("!" + JSON.stringify(command_config["commands"][key]["keyword"]));
-          			if (message == ("!" + command_config["commands"][key]["keyword"])) {
+          			if (S(message).contains("!" + command_config["commands"][key]["keyword"])) {
             			if (command_config["commands"][key]["before"] == "from") {
   							if (command_config["commands"][key]["target"] == "from") {
   								say(from, from + command_config["commands"][key]["message"]);
@@ -275,14 +275,14 @@ module.exports = {
    			 */
   			var channel = message.split(" ");
   			channel = cleanArray(channel);
-  			if (channel[0] + " " + channel[1] == "!source this") {
+  			if (S(channel[0] + " " + channel[1]).contains("!source this")) {
   				console.log("!source " + channel[1]);
   				if (channel[1] == "this") {
   					join(to);
   					say(to, "You can find the Source of this bot at https://github.com/MTRNord/nordlab-hackerspace-door");
   				}
   			}
-  			if (message == "!doorstatus") {
+  			if (S(message).contains("!doorstatus")) {
   				request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
   					if (!error && response.statusCode == 200) {
   						/**
@@ -316,7 +316,7 @@ module.exports = {
           			}
         		}).setMaxListeners(0);
   			}
-  			if (channel[0] + " " + channel[1] == "!doorstatus this") {
+  			if (S(channel[0] + " " + channel[1]).contains("!doorstatus this")) {
   				request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
   					if (!error && response.statusCode == 200) {
   						/**
@@ -371,7 +371,7 @@ module.exports = {
           			}
         		}).setMaxListeners(0);
       		}
-      		if (message == "!kill") {
+      		if (S(message).contains("!kill")) {
         		if ((from == "DasNordlicht") || (from == "MTRNord")) {
           			console.log(from + ' => ' + to + ': ' + message);
     				if (process.platform === "win32") {
@@ -384,6 +384,12 @@ module.exports = {
     				}
     			}
     		}
+        if (S(message).contains("!join")) {
+          if ((from == "DasNordlicht") || (from == "MTRNord")) {
+              console.log(from + ' => ' + to + ': ' + message);
+              join(channel[1]);
+        }
+      }
     	})
   	},
 	/**
