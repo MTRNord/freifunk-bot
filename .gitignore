@@ -27,3 +27,5 @@ build/Release
 node_modules
 install.js
 uninstall.js
+daemon
+serviceRestart.bat

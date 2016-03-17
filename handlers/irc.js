@@ -96,6 +96,11 @@ function join(event, callback) {
     client.join(event, callback);
   });
 }
+function list(event, callback) {
+  clients.forEach(function(client) {
+    client.list(event, callback);
+  });
+}
 function disconnect(event, callback) {
   clients.forEach(function(client) {
     client.disconnect(event, callback);
@@ -344,12 +349,12 @@ module.exports = {
 	      		 			door_status = "open";
 	      	  			}
             			console.log(message);
-            			bot.list();
+            			list();
             			console.log(channel[(channel.length-(channel.length-1))+1]);
             			console.log(channel.length);
             			if (channel[1] !== "this") {
               				if (channel[1] !== " ") {
-                				bot.addListener('channellist', function (channel_list) {
+                			addListener('channellist', function (channel_list) {
                   					for (var key in channel_list) {
                     					if (channel_list.hasOwnProperty(key)) {
                       						if (channel_list[key]["name"] == channel[1]) {
