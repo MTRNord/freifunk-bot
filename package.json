@@ -20,19 +20,29 @@
     "notification"
   ],
   "dependencies": {
+    "async": "^2.0.0-rc.3",
+    "botanio": "0.0.6",
     "curlrequest": "*",
+    "ent": "git+https://github.com/substack/node-ent.git",
+    "express": "^4.13.4",
+    "html-entities": "^1.2.0",
     "irc": "0.4.0",
+    "jsonfile": "^2.3.0",
     "node-schedule": "*",
+    "node-telegram-bot-api": "^0.21.1",
     "request": "*",
-    "simple-git": "*",
+    "simple-git": "^1.31.0",
     "slackbots": "^0.5.1",
     "string": "^3.3.1",
-    "yargs": "*"
+    "yargs": "^4.3.2"
   },
   "preferGlobal": false,
   "private": true,
   "license": "SEE LICENSE IN LICENSE.md",
   "optionalDependencies": {
     "yuidocjs": "^0.9.0"
+  },
+  "devDependencies": {
+    "request-debug": "^0.2.0"
   }
 }

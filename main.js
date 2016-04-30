@@ -15,9 +15,12 @@ var params_config = require("./configs/ircServer.json");
 var autoupdate = params_config["autoupdate"];
 
 //LOAD MODULES DOWN HERE
+require('./helper/heroku.js');
 var pushbullet = require('./handlers/pushbullet.js');
 var irc = require('./handlers/irc.js');
 var slack = require('./handlers/slack.js');
+var getNodes = require('./handlers/getNodes.js');
+var telegram = require('./handlers/telegram.js');
 
 //Constants
 var SIGINT = "SIGINT";
@@ -25,6 +28,8 @@ var door_status2 = "1";
 
 //Startup
 irc.ircPreload();
+getNodes.saveNodes()
+telegram.start()
 
 
 /**
@@ -81,7 +86,7 @@ function GetData(){
           		//ADD MODULES DOWN HERE
           		//Call Module send/main Functions
           		pushbullet.pushbulletSend(door_status);
-          		irc.ircSend(door_status);
+          		//irc.ircSend(door_status);
               return door_status;
 
         		}else{
@@ -112,7 +117,6 @@ process.on(SIGINT, function () {
 
 //Activate IRC-Bot Command Handler
 irc.ircBotCommands();
-
 
 /**
  * Update - Pull last master from Github

@@ -10,8 +10,13 @@
 var irc = require('irc');
 var request = require('request');
 var S = require('string');
+var jsonfile = require('jsonfile')
+var ent = require('ent');
+var decode = require('ent/decode');
+
 var command_config = require("../configs/commands.json");
 var params_config = require("../configs/ircServer.json");
+var getNodes = require('./getNodes.js');
 
 //Set Params
 /**
@@ -287,6 +292,42 @@ module.exports = {
   					say(to, "You can find the Source of this bot at https://github.com/MTRNord/nordlab-hackerspace-door");
   				}
   			}
+        // TODO ADD !nodes [Community code]
+        /*getNodes.countNodes("FFFL")
+          */
+
+        if (S(message).contains("!nodes")) {
+          jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
+            var communities = obj
+            for (var key in communities.communities) {
+              if (communities.communities.hasOwnProperty(key)) {
+                var ccode = communities.communities[key].ccode;
+                if (ccode.toLowerCase() === channel[1]) {
+                  clients.forEach(function(client) {
+                    getNodes.countNodes(channel[1], "irc", "", "", "", client, "", to)
+                  });
+                }
+              }
+            }
+          });
+        }
+
+        if (S(message).contains("!communities")) {
+          jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
+            var communities = obj
+            var communities_list = ""
+            for (var key in communities.communities) {
+              if (communities.communities.hasOwnProperty(key)) {
+                var ccode = decode(communities.communities[key].ccode)
+                var name = decode(communities.communities[key].name)
+                communities_list = communities_list + name + ": " + ccode + "  "
+              }
+            }
+            say(to, communities_list)
+          })
+        }
+
+
   			if (S(message).contains("!doorstatus")) {
   				request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
   					if (!error && response.statusCode == 200) {

@@ -63,7 +63,10 @@ module.exports = {
  	* @method slackPreload
 	*/
 	slackPreload: function () {
-	}
+	},
+  slackSend: function (channel, message) {
+    bot.postMessage(channel, message)
+  }
 }
 
 // more information about additional params https://api.slack.com/methods/chat.postMessage
