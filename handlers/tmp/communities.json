@@ -32,7 +32,7 @@
 	    },
 	    "FFHL": {
 	        "ccode": "FFHL",
-	    	"name": "Freifunk L&uuml;beck",
+	    	"name": "Freifunk Lübeck",
 	    	"nodesURL": "https://map.luebeck.freifunk.net/data/nodes.json",
 	    	"v6": "fdef:ffc0:3dd7:",
 	    	"v6mask": "/64",
@@ -53,7 +53,7 @@
 	    "FFAC": {
 	        "ccode": "FFAC",
 	    	"name": "Freifunk Aachen",
-	    	"nodesURL": "http://map.freifunk-aachen.de/v2/data/nodes.json",
+	    	"nodesURL": "https://data.aachen.freifunk.net/nodes.json",
 	    	"v6": "2a03:2260:114:",
 	    	"v6mask": "/48",
 	    	"v4": "10.5.0.0",
@@ -189,6 +189,16 @@
 	    	"v4": "10.60.0.0",
 	    	"v4mask": "/16",
 	    	"supported": 0
+	    },
+	    "FFHH": {
+	        "ccode": "FFHH",
+	    	"name": "Freifunk Hamburg",
+	    	"nodesURL": "https://map.hamburg.freifunk.net/nodes.json",
+	    	"v6": "2a03:2267::",
+	    	"v6mask": "/48",
+	    	"v4": "10.112.0.0",
+	    	"v4mask": "/18",
+	    	"supported": 1
 	    }
     }
 }
