@@ -6,6 +6,7 @@ var getNodes = require('./getNodes.js');
 var botan = require('botanio')(token);
 var ent = require('ent');
 var decode = require('ent/decode');
+var util = require('util');
 // Setup polling way
 var bot = new TelegramBot(token, {polling: true});
 module.exports = {
@@ -40,7 +41,13 @@ module.exports = {
             communities_list = communities_list + name + ": " + ccode + "\n"
           }
         }
-        botan.track(msg, 'communities');
+        botan.track(msg, 'communities', function (err, res, body) {
+          if (err) {
+            console.log("[BOTAN] ERR: " + err);
+          }
+          console.log("[BOTAN] RES: " + res.statusCode);
+          console.log("[BOTAN] BODY: " + util.inspect(body, {showHidden: false, depth: null}));
+        });
         bot.sendMessage(fromId, communities_list);
       });
     });
