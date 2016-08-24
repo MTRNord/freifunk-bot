@@ -15,8 +15,9 @@ module.exports = {
 	 * @class pushbullet
  	 * @constructor
 	 */
+	var token = process.env.pushbullet_api
 	pushbulletSend: function (door_status){
-		curl.request({ url: 'https://api.pushbullet.com/v2/pushes', method: 'POST', headers: { "Access-Token": 'z02rQPOZVBlSkW9pfHgKvaQvBTuXbaTt', "Content-Type": 'application/json' }, data: '{"channel_tag": "space-door", "body":"'+ door_status + '","title":"Door Status","type":"note"}'}, function (err, stdout, meta) {
+		curl.request({ url: 'https://api.pushbullet.com/v2/pushes', method: 'POST', headers: { "Access-Token": 'token', "Content-Type": 'application/json' }, data: '{"channel_tag": "space-door", "body":"'+ door_status + '","title":"Door Status","type":"note"}'}, function (err, stdout, meta) {
 			if (err){
 				/**
         		 * Fired when an error occurs...
