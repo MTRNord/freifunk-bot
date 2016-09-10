@@ -1,6 +1,6 @@
 var token = process.env.telegram_api
-if ((token == undefinded) || (token == "")) {
-  console.log("No token defined")
+if (typeof token == 'undefined' && !token) {
+  console.log("No Telegram token defined")
 }
 var TelegramBot = require('node-telegram-bot-api');
 var jsonfile = require('jsonfile')
