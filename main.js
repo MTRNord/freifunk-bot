@@ -93,7 +93,7 @@ function GetData(){
     	}
     }).setMaxListeners(0);
 	//Rerun Function after 10 seconds
-	setTimeout(function() { GetData(); }, 10000);
+	setTimeout(function() {}, 10000);
 }
 //Handle "[CTRL]+[C]"
 if (process.platform === "win32") {
@@ -161,8 +161,16 @@ async.auto({
       telegram.start(callback)
     },
     GetData: function (callback) {
-      //Run Mainfunction 20seconds after script start
-      setTimeout(function() { GetData(callback); }, 20000)
+      async.forever(
+        function(next) {
+          GetData(next)
+          callback(err)
+        },
+        function(err) {
+          // if next is called with a value in its first parameter, it will appear
+          // in here as 'err', and execution will stop.
+      }
+    );
     }
   },
   function(err, result) {
