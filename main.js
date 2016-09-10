@@ -136,14 +136,14 @@ function restart(){
   require('child_process').exec('npm restart');
 }
 
-var j = schedule.scheduleJob('59 3 * * *', function(){
-  if (!argv.noupdate && autoupdate == 1) {
-    //Run update at 3am and 59min
-    update();
-  }else{
-    restart();
-  }
-});
+// var j = schedule.scheduleJob('59 3 * * *', function(){
+//   if (!argv.noupdate && autoupdate == 1) {
+//     //Run update at 3am and 59min
+//     update();
+//   }else{
+//     restart();
+//   }
+// });
 
 //Startup
 async.auto({
