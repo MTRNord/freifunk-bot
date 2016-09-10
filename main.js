@@ -12,6 +12,7 @@ var schedule = require('node-schedule');
 var argv = require('yargs').argv;
 var params_config = require("./configs/ircServer.json");
 var autoupdate = params_config["autoupdate"];
+var async = require("async");
 
 //LOAD MODULES DOWN HERE
 require('./helper/heroku.js');
@@ -24,11 +25,6 @@ var telegram = require('./handlers/telegram.js');
 //Constants
 var SIGINT = "SIGINT";
 var door_status2 = "1";
-
-//Startup
-irc.ircPreload();
-getNodes.saveNodes()
-telegram.start()
 
 
 /**
@@ -114,9 +110,6 @@ process.on(SIGINT, function () {
 	process.exit();
 }).setMaxListeners(0);
 
-//Activate IRC-Bot Command Handler
-irc.ircBotCommands();
-
 /**
  * Update - Pull last master from Github
  *
@@ -151,5 +144,29 @@ var j = schedule.scheduleJob('59 3 * * *', function(){
   }
 });
 
-//Run Mainfunction 20seconds after script start
-setTimeout(function() { GetData(); }, 20000);
+//Startup
+async.whilst(
+  function (callback) {
+    // callback has to be called by `uploadImage` when it's done
+    irc.ircPreload(callback)
+  },
+  function (callback) {
+    getNodes.saveNodes(callback)
+  },
+  function (callback) {
+    telegram.start(callback)
+  },
+  function (callback) {
+    //Activate IRC-Bot Command Handler
+    irc.ircBotCommands(callback)
+  },
+  function (callback) {
+    //Run Mainfunction 20seconds after script start
+    setTimeout(function() { GetData(callback); }, 20000)
+  },
+  function(err, n) {
+    if (err) {
+      console.log(err)
+    }
+  }
+);

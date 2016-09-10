@@ -20,6 +20,7 @@
     "notification"
   ],
   "dependencies": {
+    "async": "^2.0.1",
     "botanio": "0.0.6",
     "curlrequest": "^0.5.4",
     "ent": "git+https://github.com/substack/node-ent.git",

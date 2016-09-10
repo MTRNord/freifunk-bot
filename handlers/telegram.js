@@ -1,5 +1,7 @@
-//TOKEN     165809140:AAEEpJP4hgcEsf6ry1Vd6Lp0_8rfRrXFB3A
-var token = '165809140:AAEEpJP4hgcEsf6ry1Vd6Lp0_8rfRrXFB3A';
+var token = process.env.telegram_api
+if ((token == undefinded) || (token == "")) {
+  console.log("No token defined")
+}
 var TelegramBot = require('node-telegram-bot-api');
 var jsonfile = require('jsonfile')
 var getNodes = require('./getNodes.js');
