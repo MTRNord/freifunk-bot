@@ -163,12 +163,13 @@ async.auto({
     GetData: function (callback) {
       async.forever(
         function(next) {
-          GetData(next)
-          callback(err)
+          GetData()
+          callback(next)
         },
         function(err) {
           // if next is called with a value in its first parameter, it will appear
           // in here as 'err', and execution will stop.
+          callback(err)
       }
     );
     }
