@@ -15,7 +15,7 @@ var decode = require('ent/decode');
 var util = require('util');
 var _ = require("underscore");
 // Setup polling way
-var bot = new TelegramBot(token, {polling: true});
+var bot = new TelegramBot(telegram_token, {polling: true});
 module.exports = {
   start: function () {
     bot.onText(/\/nodes (.+)/, function (msg, match) {
