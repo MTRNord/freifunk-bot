@@ -82,10 +82,10 @@ module.exports = {
                     if (key["flags"]["online"] == true) {
                       count++;
                     }
-                    if (key.hasOwnProperty('status')) {
-                      if (key["status"]["online"] == true) {
-                        count++;
-                      }
+                  }
+                  if (key.hasOwnProperty('status')) {
+                    if (key["status"]["online"] == true) {
+                      count++;
                     }
                   }
                 });
