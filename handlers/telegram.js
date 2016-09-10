@@ -1,11 +1,15 @@
-var token = process.env.telegram_api
-if (typeof token == 'undefined' && !token) {
+var telegram_token = process.env.telegram_api
+if (typeof telegram_token == 'undefined' && !telegram_token) {
   console.log("No Telegram token defined")
+}
+var botan_token = process.env.botan_api
+if (typeof botan_token == 'undefined' && !botan_token) {
+  console.log("No Botan token defined")
 }
 var TelegramBot = require('node-telegram-bot-api');
 var jsonfile = require('jsonfile')
 var getNodes = require('./getNodes.js');
-var botan = require('botanio')("H4dyFijDsUeCfwvMe-_nDuzdOYFyo_SR");
+var botan = require('botanio')(botan_token);
 var ent = require('ent');
 var decode = require('ent/decode');
 var util = require('util');
@@ -23,6 +27,7 @@ module.exports = {
         _.find(communities.communities, function (key) {
             var ccode = key["ccode"];
             if (ccode.toLowerCase() === resp.toLowerCase()) {
+              bot.sendMessage(fromId, "Counting Nodes");
               getNodes.countNodes(resp.toLowerCase(), "telegram", fromId, msg, "", bot, botan)
             }
         });

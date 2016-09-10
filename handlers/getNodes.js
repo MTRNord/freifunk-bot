@@ -91,7 +91,7 @@ module.exports = {
                 });
                 var output = "Current nodes in " + name + ": " + count
                 if(handler === "telegram"){
-                  bot.sendMessage(TfromId, output);
+                  bot.editMessageText(output, TfromId)
                   botan.track(Tmsg, 'nodes ' + ccode_func)
                 }else {
                   if(handler === "irc"){
