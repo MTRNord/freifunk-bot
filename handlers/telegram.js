@@ -27,7 +27,6 @@ module.exports = {
         _.find(communities.communities, function (key) {
             var ccode = key["ccode"];
             if (ccode.toLowerCase() === resp.toLowerCase()) {
-              bot.sendMessage(fromId, "Counting Nodes");
               getNodes.countNodes(resp.toLowerCase(), "telegram", fromId, msg, "", bot, botan)
             }
         });
