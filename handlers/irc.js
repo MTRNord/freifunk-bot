@@ -67,15 +67,15 @@ for (var key in params_config["servers"]) {
     var main_channel = params_config["servers"][key]["main_channel"];
     var active = params_config["servers"][key]["active"];
     var debug = params_config["servers"][key]["debug"];
-    // if (debug == 1) {
-    //   var debug = true;
-    // }else{
-    //   var debug = false;
-    // }
-    // if (debug == false) {
-    //   console = console || {};
-    //   console.log = function(){};
-    // }
+    if (debug == 1) {
+      var debug = true;
+    }else{
+      var debug = false;
+    }
+    if (debug == false) {
+      console = console || {};
+      console.log = function(){};
+    }
     if (active == 1) {
       bot[key] = new irc.Client(serveraddress, botname, {
         debug: debug,

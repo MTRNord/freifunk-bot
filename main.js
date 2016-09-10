@@ -145,26 +145,27 @@ var j = schedule.scheduleJob('59 3 * * *', function(){
 });
 
 //Startup
-async.whilst(
-  function (callback) {
-    // callback has to be called by `uploadImage` when it's done
-    irc.ircPreload(callback)
-  },
-  function (callback) {
-    //Activate IRC-Bot Command Handler
-    irc.ircBotCommands(callback)
-  },
-  function (callback) {
-    getNodes.saveNodes(callback)
-  },
-  function (callback) {
-    telegram.start(callback)
-  },
-  function (callback) {
-    //Run Mainfunction 20seconds after script start
-    setTimeout(function() { GetData(callback); }, 20000)
-  },
-  function(err, n) {
+async.parallel([
+    function (callback) {
+      // callback has to be called by `uploadImage` when it's done
+      irc.ircPreload(callback)
+    },
+    function (callback) {
+      //Activate IRC-Bot Command Handler
+      irc.ircBotCommands(callback)
+    },
+    function (callback) {
+      getNodes.saveNodes(callback)
+    },
+    function (callback) {
+      telegram.start(callback)
+    },
+    function (callback) {
+      //Run Mainfunction 20seconds after script start
+      setTimeout(function() { GetData(callback); }, 20000)
+    }
+  ],
+  function(err, result) {
     if (err) {
       console.log(err)
     }
