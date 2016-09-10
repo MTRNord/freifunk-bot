@@ -35,6 +35,7 @@
     "simple-git": "^1.21.0",
     "slackbots": "^0.5.1",
     "string": "^3.3.1",
+    "underscore": "^1.8.3",
     "yargs": "^4.1.0"
   },
   "preferGlobal": false,

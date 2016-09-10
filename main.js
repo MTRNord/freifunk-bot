@@ -13,6 +13,7 @@ var argv = require('yargs').argv;
 var params_config = require("./configs/ircServer.json");
 var autoupdate = params_config["autoupdate"];
 var async = require("async");
+var _ = require("underscore");
 
 //LOAD MODULES DOWN HERE
 require('./helper/heroku.js');
@@ -170,8 +171,8 @@ async.auto({
           // if next is called with a value in its first parameter, it will appear
           // in here as 'err', and execution will stop.
           callback(err)
-      }
-    );
+        }
+      );
     }
   },
   function(err, result) {

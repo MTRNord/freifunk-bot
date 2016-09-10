@@ -9,6 +9,7 @@ var botan = require('botanio')("H4dyFijDsUeCfwvMe-_nDuzdOYFyo_SR");
 var ent = require('ent');
 var decode = require('ent/decode');
 var util = require('util');
+var _ = require("underscore");
 // Setup polling way
 var bot = new TelegramBot(token, {polling: true});
 module.exports = {
@@ -19,14 +20,12 @@ module.exports = {
       bot.sendChatAction(fromId, "typing")
       jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
         var communities = obj
-        for (var key in communities.communities) {
-          if (communities.communities.hasOwnProperty(key)) {
-            var ccode = communities.communities[key].ccode;
+        _.find(communities.communities, function (key) {
+            var ccode = key["ccode"];
             if (ccode.toLowerCase() === resp.toLowerCase()) {
               getNodes.countNodes(resp.toLowerCase(), "telegram", fromId, msg, "", bot, botan)
             }
-          }
-        }
+        });
       });
     });
     bot.onText(/\/communities/, function (msg, match) {
@@ -36,13 +35,11 @@ module.exports = {
       jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
         var communities = obj
         var communities_list = ""
-        for (var key in communities.communities) {
-          if (communities.communities.hasOwnProperty(key)) {
-            var ccode = decode(communities.communities[key].ccode)
-            var name = decode(communities.communities[key].name)
+        _.find(communities.communities, function (key) {
+            var ccode = decode(key["ccode"])
+            var name = decode(key["name"])
             communities_list = communities_list + name + ": " + ccode + "\n"
-          }
-        }
+        });
         botan.track(msg, 'communities', function (err, res, body) {
           if (err) {
             console.log("[BOTAN] ERR: " + err);

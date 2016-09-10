@@ -11,6 +11,7 @@ var command_config = require("../configs/commands.json");
 var params_config = require("../configs/slackServer.json");
 var SlackBot = require('slackbots');
 var S = require('string');
+var _ = require("underscore");
 
 //Set Params
 /**
@@ -28,19 +29,18 @@ var botname = params_config["botname"];
  */
 var disconnect_meassage = params_config["disconnect_meassage"];
 var session;
-for (var key in params_config["servers"]) {
-  if (params_config["servers"].hasOwnProperty(key)) {
-    var serveraddress = params_config["servers"][key]["serveraddress"];
-    var devChannel = params_config["servers"][key]["devChannel"];
-    var token = params_config["servers"][key]["token"];
-    var active = params_config["servers"][key]["active"];
-    var debug = params_config["servers"][key]["debug"];// create a bot
-    var bot = new SlackBot({
-      token: token,
-      name: 'FreifunkBot'
-    });
-  }
-}
+_.find(params_config["servers"], function (key) {
+  serveraddress = key["serveraddress"];
+  devChannel = key["devChannel"];
+  token = key["token"];
+  active = key["active"];
+  debug = key["debug"];
+  bot = new SlackBot({
+    token: token,
+    name: 'FreifunkBot'
+  });
+});
+
 function getDateTime() {
     var date = new Date();
     var hour = date.getHours();
@@ -56,6 +56,7 @@ function getDateTime() {
     day = (day < 10 ? "0" : "") + day;
     return day + "." + month + "." + year + "  "  + hour + ":" + min + ":" + sec;
 }
+
 module.exports = {
   /**
  	* Connects to Server
@@ -87,19 +88,13 @@ bot.on('message', function(data) {
     if (textmessage != null){
       textmessage = textmessage.toLowerCase();
     }
-    // if (S(textmessage).contains('!help')) {
-    //   console.log(channel);
-    //   bot.postMessage(channel, 'help!', params);
-    // }
-    for (var key in command_config["commands"]) {
-      if (command_config["commands"].hasOwnProperty(key)) {
+    _.find(command_config["commands"], function (key) {
         if (subtype != "bot_message"){
-          if (S(textmessage).contains("!" + command_config["commands"][key]["keyword"])) {
-            bot.postMessage(channel, command_config["commands"][key]["message"], params);
+          if (S(textmessage).contains("!" + key["keyword"])) {
+            bot.postMessage(channel, key["message"], params);
           }else {
             console.log("");
           }
         }
-      }
-    }
+    });
 });
