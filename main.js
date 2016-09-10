@@ -151,14 +151,14 @@ async.whilst(
     irc.ircPreload(callback)
   },
   function (callback) {
+    //Activate IRC-Bot Command Handler
+    irc.ircBotCommands(callback)
+  },
+  function (callback) {
     getNodes.saveNodes(callback)
   },
   function (callback) {
     telegram.start(callback)
-  },
-  function (callback) {
-    //Activate IRC-Bot Command Handler
-    irc.ircBotCommands(callback)
   },
   function (callback) {
     //Run Mainfunction 20seconds after script start
