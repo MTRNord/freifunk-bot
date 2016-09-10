@@ -12,7 +12,7 @@ var request = require('request');
 var S = require('string');
 var jsonfile = require('jsonfile')
 var async = require("async");
-var _ = require("underscore");
+var _ = require("lodash");
 
 
 var command_config = require("../configs/commands.json");

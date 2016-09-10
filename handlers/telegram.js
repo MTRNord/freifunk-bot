@@ -14,7 +14,7 @@ var ent = require('ent');
 var decode = require('ent/decode');
 var util = require('util');
 var async = require("async");
-var _ = require("underscore");
+var _ = require("lodash");
 // Setup polling way
 var bot = new TelegramBot(telegram_token, {polling: true});
 module.exports = {

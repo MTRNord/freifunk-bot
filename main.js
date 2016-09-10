@@ -13,7 +13,7 @@ var argv = require('yargs').argv;
 var params_config = require("./configs/ircServer.json");
 var autoupdate = params_config["autoupdate"];
 var async = require("async");
-var _ = require("underscore");
+var _ = require("lodash");
 
 //LOAD MODULES DOWN HERE
 require('./helper/heroku.js');

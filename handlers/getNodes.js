@@ -12,7 +12,7 @@ var request = require('request')
 var fs = require('fs');
 var jsonfile = require('jsonfile')
 var slack = require('./slack.js');
-var _ = require("underscore");
+var _ = require("lodash");
 /**
  * Get Community Config at start
  *

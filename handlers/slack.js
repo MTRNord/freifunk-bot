@@ -11,7 +11,7 @@ var command_config = require("../configs/commands.json");
 var params_config = require("../configs/slackServer.json");
 var SlackBot = require('slackbots');
 var S = require('string');
-var _ = require("underscore");
+var _ = require("lodash");
 
 //Set Params
 /**
