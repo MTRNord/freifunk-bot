@@ -158,7 +158,7 @@ module.exports = {
                   status = key["flags"]["online"]
                   since = key["firstseen"]
                   lat = key["nodeinfo"]["location"]["latitude"]
-                  long = key["nodeinfo"]["location"]["longitude"]
+                  lon = key["nodeinfo"]["location"]["longitude"]
                   request.get('http://nominatim.openstreetmap.org/reverse?format=json&lat='+ lat + '&lon=' + lon + '&zoom=18&addressdetails=1'), function (error, response, body) {
                     if (!error && response.statusCode === 200) {
                       addressJson = JSON.parse(body)
