@@ -157,21 +157,36 @@ module.exports = {
                   clients = key["statistics"]["clients"]
                   status = key["flags"]["online"]
                   since = key["firstseen"]
+                  lat = key["nodeinfo"]["location"]["latitude"]
+                  long = key["nodeinfo"]["location"]["longitude"]
+                  request.get('http://nominatim.openstreetmap.org/reverse?format=json&lat='+ lat + '&lon=' + lon + '&zoom=18&addressdetails=1', function (error, response, body) {
+                    if (!error && response.statusCode === 200) {
+                      addressJson = JSON.parse(body)
+                      _.find(addressJson.address, function (key) {
+                        house_number = key["house_number"]
+                        road = key["road"]
+                        town = key["town"]
+                        postcode = key["postcode"]
+                        country = key["country"]
+                        adress = road + " " + house_number + ", " + postcode + " " + town + ", " + country
+                      });
+                    }
+                  });
                   if(handler == "telegram"){
-                    output = "<b>Name: </b>" + name + "\n<b>Router Model: </b>" + router + "\n<b>Firmware Version: </b>" + version + "\n<b>Autoupdater Status: </b>" + autoupdate + "\n<b>Autoupdater Branch: </b>" + autoupdateBranch + "\n<b>Clients Connected: </b>" + clients + "\n<b>Online Status: </b>" + status + "\n<b>First Seen: </b>" + since
+                    output = "<b>Name: </b>" + name + "\n<b>Router Location: </b>" + adress + "\n<b>Router Model: </b>" + router + "\n<b>Firmware Version: </b>" + version + "\n<b>Autoupdater Status: </b>" + autoupdate + "\n<b>Autoupdater Branch: </b>" + autoupdateBranch + "\n<b>Clients Connected: </b>" + clients + "\n<b>Online Status: </b>" + status + "\n<b>First Seen: </b>" + since
                   }
                   if(handler == "irc"){
-                    output = "Name: " + name + "\nRouter Model: " + router + "\nFirmware Version: " + version + "\nAutoupdater Status: " + autoupdate + "\nAutoupdater Branch: " + autoupdateBranch + "\nClients Connected: " + clients + "\nOnline Status: " + status + "\nFirst Seen: " + since
+                    output = "Name: " + name + "\nRouter Location: " + adress + "\nRouter Model: " + router + "\nFirmware Version: " + version + "\nAutoupdater Status: " + autoupdate + "\nAutoupdater Branch: " + autoupdateBranch + "\nClients Connected: " + clients + "\nOnline Status: " + status + "\nFirst Seen: " + since
                   }
                   if(handler == "slack"){
-                    output = "<b>Name: </b>" + name + "\n<b>Router Model: </b>" + router + "\n<b>Firmware Version: </b>" + version + "\n<b>Autoupdater Status: </b>" + autoupdate + "\n<b>Autoupdater Branch: </b>" + autoupdateBranch + "\n<b>Clients Connected: </b>" + clients + "\n<b>Online Status: </b>" + status + "\n<b>First Seen: </b>" + since
+                    output = "<b>Name: </b>" + name + "\n<b>Router Location: </b>" + adress + "\n<b>Router Model: </b>" + router + "\n<b>Firmware Version: </b>" + version + "\n<b>Autoupdater Status: </b>" + autoupdate + "\n<b>Autoupdater Branch: </b>" + autoupdateBranch + "\n<b>Clients Connected: </b>" + clients + "\n<b>Online Status: </b>" + status + "\n<b>First Seen: </b>" + since
                   }
                 }
               });
               if (askedNode.toLowerCase() !== "noarg") {
                 if(handler == "telegram"){
                   bot.sendMessage(TfromId, output, {"parse_mode": "HTML"})
-                  botan.track(Tmsg, 'node ' + ccode_func)
+                  botan.track(Tmsg, 'node ' + ccode_func + " " + askedNode.toLowerCase())
                 }
                 if(handler == "irc"){
                   bot.say(IRCto, output);
