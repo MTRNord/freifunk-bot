@@ -21,7 +21,7 @@ require('./helper/heroku.js');
 var pushbullet = require('./handlers/pushbullet.js');
 var irc = require('./handlers/irc.js');
 var slack = require('./handlers/slack.js');
-var getNodes = require('./handlers/getNodes.js');
+var getNodes = require('./handlers/parseNodes.js');
 var telegram = require('./handlers/telegram.js');
 
 //Constants
@@ -60,6 +60,7 @@ function GetData(){
          */
     		//TODO Add real Error Handler
       		door_status = error;
+          throw new Error(err)
    		}
    		//If no error -> go on
     	if (!error && response.statusCode === 200) {
@@ -119,7 +120,7 @@ process.on(SIGINT, function () {
  */
 function update(){
   git.pull("origin", "master", function(err, update) {
-    if (err) {console.log(err)}
+    if (err) {throw new Error(err)}
     if(update && update.summary.changes) {
       console.log('Start Update!');
       restart();

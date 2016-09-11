@@ -28,7 +28,7 @@ module.exports = {
         		 * @property err
         		 * @type String
         		 */
-				console.log(err);
+				throw new Error(err)
 			}
 		});
 	}

@@ -18,7 +18,7 @@ var rl = require("readline")
 
 var command_config = require("../configs/commands.json");
 var params_config = require("../configs/ircServer.json");
-var getNodes = require('./getNodes.js');
+var getNodes = require('./parseNodes.js');
 
 //Set Params
 /**
@@ -80,7 +80,7 @@ _.find(params_config["servers"], function (key) {
       autoConnect: false,
       messageSplit: 1000000,
       floodProtection: true,
-      floodProtectionDelay: 1000
+      floodProtectionDelay: 200
     });
     clients.push(bot[key]);
   }
@@ -287,7 +287,7 @@ module.exports = {
         nodes: function (callback) {
           if (S(message).contains("!nodes")) {
             jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
-              if (err) {console.log(err)}
+              if (err) {throw new Error(err);}
               var communities = obj
               _.find(communities.communities, function (key) {
                 var ccode = key["ccode"];
@@ -300,10 +300,29 @@ module.exports = {
             });
           }
         },
+        node: function (callback) {
+          if (S(message).contains("!node") || !S(message).contains("!nodes")) {
+            jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
+              if (err) {throw new Error(err);}
+              var communities = obj
+              _.find(communities.communities, function (key) {
+                var ccode = key["ccode"];
+                if (ccode.toLowerCase() === channel[1]) {
+                  clients.forEach(function(client) {
+                    if (channel[2] == undefined) {
+                      channel[2] = "NoArg"
+                    }
+                    getNodes.NodeInfo(channel[1], channel[2].toLowerCase(), "irc", "", "", "", client, "", from)
+                  });
+                }
+              });
+            });
+          }
+        },
         communities: function (callback) {
           if (S(message).contains("!communities")) {
             jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
-              if (err) {console.log(err)}
+              if (err) {throw new Error(err);}
               var communities = obj
               var communities_list = ""
               _.find(communities.communities, function (key) {
@@ -334,7 +353,7 @@ module.exports = {
             			* @type String
             			*/
     	      		door_status = error;
-    	      		console.log(error);
+    	      		throw new Error(err);
     	      	}
               if (!error && response.statusCode === 200) {
     	      	  if (door_status === "geschlossen") {
@@ -370,7 +389,7 @@ module.exports = {
             		  * @type String
             		  */
     	      		door_status = error;
-    	      		console.log(error);
+    	      		throw new Error(err);
     	      	}
               if (!error && response.statusCode == 200) {
     	      	  if (door_status === "geschlossen") {
@@ -431,7 +450,7 @@ module.exports = {
       },
       function(err, result) {
         if (err) {
-          console.log(err)
+          throw new Error(err);
         }
       }
     );
