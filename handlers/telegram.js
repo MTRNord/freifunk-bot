@@ -1,9 +1,9 @@
 var telegram_token = process.env.telegram_api
-if (typeof telegram_token == 'undefined' && !telegram_token) {
+if (typeof telegram_token === 'undefined' && !telegram_token) {
   console.log("No Telegram token defined")
 }
 var botan_token = process.env.botan_api
-if (typeof botan_token == 'undefined' && !botan_token) {
+if (typeof botan_token === 'undefined' && !botan_token) {
   console.log("No Botan token defined")
 }
 var TelegramBot = require('node-telegram-bot-api');
@@ -26,6 +26,7 @@ module.exports = {
           var resp = match[1];
           bot.sendChatAction(fromId, "typing")
           jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
+            if (err) {console.log(err)}
             var communities = obj
             _.find(communities.communities, function (key) {
                 var ccode = key["ccode"];
@@ -43,6 +44,7 @@ module.exports = {
           var resp = match[1];
           bot.sendChatAction(fromId, "typing")
           jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
+            if (err) {console.log(err)}
             var communities = obj
             var communities_list = ""
             _.find(communities.communities, function (key) {

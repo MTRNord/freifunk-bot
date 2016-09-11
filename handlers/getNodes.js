@@ -23,7 +23,7 @@ module.exports = {
   saveNodes: function () {
     request.get('https://cdn.rawgit.com/MTRNord/gluon-web-remote/5d0c3a2c49b79d2971b8b3cc24398d45833ad1c6/configs/communities.json', function (err, res, body) {
 
-      if (!err && res.statusCode == 200) {
+      if (!err && res.statusCode === 200) {
         /**
           * Content of communities
           *
@@ -65,7 +65,7 @@ module.exports = {
           var nodesFile_link = key["nodesURL"];
           var name = key["name"];
           request.get(nodesFile_link, function (err, res, body) {
-            if (!err && res.statusCode == 200) {
+            if (!err && res.statusCode === 200) {
               /**
                 * Content of communities
                 *
@@ -79,12 +79,12 @@ module.exports = {
                 nodes = JSON.parse(body)
                 _.find(nodes.nodes, function (key) {
                   if (key.hasOwnProperty('flags')) {
-                    if (key["flags"]["online"] == true) {
+                    if (key["flags"]["online"] === true) {
                       count++;
                     }
                   }
                   if (key.hasOwnProperty('status')) {
-                    if (key["status"]["online"] == true) {
+                    if (key["status"]["online"] === true) {
                       count++;
                     }
                   }

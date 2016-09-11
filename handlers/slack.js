@@ -85,11 +85,11 @@ bot.on('message', function(data) {
     var textmessage = data["text"];
     var channel = data["channel"];
     var subtype = data["subtype"];
-    if (textmessage != null){
+    if (textmessage === null){}else{
       textmessage = textmessage.toLowerCase();
     }
     _.find(command_config["commands"], function (key) {
-        if (subtype != "bot_message"){
+        if (subtype !== "bot_message"){
           if (S(textmessage).contains("!" + key["keyword"])) {
             bot.postMessage(channel, key["message"], params);
           }else {

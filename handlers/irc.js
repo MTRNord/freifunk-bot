@@ -291,6 +291,7 @@ module.exports = {
         nodes: function (callback) {
           if (S(message).contains("!nodes")) {
             jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
+              if (err) {console.log(err)}
               var communities = obj
               _.find(communities.communities, function (key) {
                 var ccode = key["ccode"];
@@ -306,6 +307,7 @@ module.exports = {
         communities: function (callback) {
           if (S(message).contains("!communities")) {
             jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
+              if (err) {console.log(err)}
               var communities = obj
               var communities_list = ""
               _.find(communities.communities, function (key) {
