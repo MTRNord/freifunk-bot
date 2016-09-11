@@ -1,3 +1,3 @@
 This Project is under the [DBAD PUBLIC LICENSE](https://github.com/philsturgeon/dbad/blob/master/LICENSE-en.md "DON'T BE A DICK PUBLIC LICENSE") and the [DBADJ PUBLIC LICENSE](https://github.com/philsturgeon/dbad/blob/master/LICENSE-en.md "Don't Be a Jerk: The Open Source Software License"). 
 
-Other §2 in this project than in the DBAD §2: "If you become rich through modifications, related works/services, or supporting the original work, share the love. Only a dick would make loads off this work and not buy the original work's creator(s) a Club Mate."  :) (PIzza is also ok)
+Other §2 in this project than in the DBAD §2: "If you become rich through modifications, related works/services, or supporting the original work, share the love. Only a dick would make loads off this work and not buy the original work's creator(s) a Club Mate."  :) (Pizza is also ok)
