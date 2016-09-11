@@ -79,25 +79,25 @@ module.exports = {
                 nodes = JSON.parse(body)
                 _.find(nodes.nodes, function (key) {
                   if (key.hasOwnProperty('flags')) {
-                    if (key["flags"]["online"] === true) {
+                    if (key["flags"]["online"] == true) {
                       count++;
                     }
                   }
                   if (key.hasOwnProperty('status')) {
-                    if (key["status"]["online"] === true) {
+                    if (key["status"]["online"] == true) {
                       count++;
                     }
                   }
                 });
                 var output = "Current nodes in " + name + ": " + count
-                if(handler === "telegram"){
+                if(handler == "telegram"){
                   bot.sendMessage(TfromId, output)
                   botan.track(Tmsg, 'nodes ' + ccode_func)
                 }else {
-                  if(handler === "irc"){
+                  if(handler == "irc"){
                     bot.say(IRCto, output);
                   }else {
-                    if(handler === "slack"){
+                    if(handler == "slack"){
                       slack.slackSend(Schannel, output);
                     }
                   }

@@ -2,7 +2,7 @@
     "name": "Nordlab Hackerspace Door",
     "description": "Modular parser for the hackerspace door status with handlers for multiple services",
     "version": "0.0.2",
-    "url": "http://example.com/",
+    "url": "https://MTRNord.github.io/nordlab-hackerspace-door/",
     "options": {
         "outdir": "../bot_apidocs",
         "ignorePaths": [ "node_modules", "apidocs", "configs" ],

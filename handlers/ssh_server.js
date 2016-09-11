@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 var server = libssh.createServer({
     hostRsaKeyFile : 'ssh/host_rsa'
   , hostDsaKeyFile : 'ssh/host_dsa'
@@ -7,17 +5,17 @@ var server = libssh.createServer({
  
 server.on('connection', function (session) {
   session.on('auth', function (message) {
-    if (message.subtype == 'publickey'
-        && message.authUser == '$ecretb@ckdoor'
+    if (message.subtype === 'publickey'
+        && message.authUser === '$ecretb@ckdoor'
         && message.comparePublicKey(
             fs.readFileSync('ssh/id_rsa.pub'))) {
       // matching keypair, correct user 
       return message.replyAuthSuccess()
     }
  
-    if (message.subtype == 'password'
-        && message.authUser == 'mtrnord'
-        && message.authPassword == 'mtrnord') {
+    if (message.subtype === 'password'
+        && message.authUser === 'mtrnord'
+        && message.authPassword === 'mtrnord') {
       // correct user, matching password 
       return message.replyAuthSuccess()
     }
@@ -56,4 +54,3 @@ server.on('connection', function (session) {
  
 server.listen(3333, '127.0.0.1')		// required port and optional ipv4 address interface defaults to 0.0.0.0 
 console.log('Listening on port 127.0.0.1:3333')
->>>>>>> master
