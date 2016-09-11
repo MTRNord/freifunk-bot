@@ -168,16 +168,17 @@ module.exports = {
                   }
                 }
               });
-
-              if(handler == "telegram"){
-                bot.sendMessage(TfromId, output, {"parse_mode": "HTML"})
-                botan.track(Tmsg, 'node ' + ccode_func)
-              }
-              if(handler == "irc"){
-                bot.say(IRCto, output);
-              }
-              if(handler == "slack"){
-                slack.slackSend(Schannel, output);
+              if (askedNode.toLowerCase() !== "noarg") {
+                if(handler == "telegram"){
+                  bot.sendMessage(TfromId, output, {"parse_mode": "HTML"})
+                  botan.track(Tmsg, 'node ' + ccode_func)
+                }
+                if(handler == "irc"){
+                  bot.say(IRCto, output);
+                }
+                if(handler == "slack"){
+                  slack.slackSend(Schannel, output);
+                }
               }
             }else{
               /**

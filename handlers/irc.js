@@ -80,7 +80,7 @@ _.find(params_config["servers"], function (key) {
       autoConnect: false,
       messageSplit: 1000000,
       floodProtection: true,
-      floodProtectionDelay: 1000
+      floodProtectionDelay: 200
     });
     clients.push(bot[key]);
   }
@@ -301,7 +301,7 @@ module.exports = {
           }
         },
         node: function (callback) {
-          if (S(message).contains("!node")) {
+          if (S(message).contains("!node") || !S(message).contains("!nodes")) {
             jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
               if (err) {throw new Error(err);}
               var communities = obj
@@ -309,6 +309,9 @@ module.exports = {
                 var ccode = key["ccode"];
                 if (ccode.toLowerCase() === channel[1]) {
                   clients.forEach(function(client) {
+                    if (channel[2] == undefined) {
+                      channel[2] = "NoArg"
+                    }
                     getNodes.NodeInfo(channel[1], channel[2].toLowerCase(), "irc", "", "", "", client, "", from)
                   });
                 }
