@@ -1,0 +1,204 @@
+{
+    "communities": {
+	    "FFKI": {
+	        "ccode": "FFKI",
+		    "name": "Freifunk Kiel",
+		    "nodesURL": "http://mesh.freifunk.in-kiel.de/data/nodes.json",
+		    "v6": "fda1:384a:74de:",
+		    "v6mask": "/48",
+		    "v4": "10.116.0.0",
+		    "v4mask": "/16",
+		    "supported": 1
+	    },
+	    "FFFL": {
+	        "ccode": "FFFL",
+    		"name": "Freifunk Flensburg",
+        	"nodesURL": "http://map.freifunk-flensburg.de/data/nodes.json",
+        	"v6": "fddf:bf7:10:1:",
+	    	"v6mask": "/64",
+    		"v4": "10.129.0.0",
+	    	"v4mask": "/16",
+    		"supported": 1
+	    },
+    	"FFNORD": {
+    	    "ccode": "FFNORD",
+	    	"name": "Freifunk Nord",
+		"nodesURL": "https://mesh.nord.freifunk.net/data/nodes.json",
+	    	"v6": "2a03:2267:4e6f:7264:",
+	    	"v6mask": "/64",
+	    	"v4": "10.187.0.0",
+	    	"v4mask": "/16",
+	    	"supported": 1
+	    },
+	    "FFHL": {
+	        "ccode": "FFHL",
+	    	"name": "Freifunk Lübeck",
+	    	"nodesURL": "https://map.luebeck.freifunk.net/data/nodes.json",
+	    	"v6": "fdef:ffc0:3dd7:",
+	    	"v6mask": "/64",
+	    	"v4": "10.130.0.0",
+	    	"v4mask": "/20",
+	    	"supported": 1
+	    },
+	    "FFNW": {
+	        "ccode": "FFNW",
+	    	"name": "Freifunk Nordwest",
+	    	"nodesURL": "http://mesh.sjr-ol.de/data/nodes.json",
+	    	"v6": "fd74:fdaa:9dc4:",
+	    	"v6mask": "/64",
+	    	"v4": "10.18.0.0",
+	    	"v4mask": "/16",
+	    	"supported": 1
+	    },
+	    "FFAC": {
+	        "ccode": "FFAC",
+	    	"name": "Freifunk Aachen",
+	    	"nodesURL": "https://data.aachen.freifunk.net/nodes.json",
+	    	"v6": "2a03:2260:114:",
+	    	"v6mask": "/48",
+	    	"v4": "10.5.0.0",
+	    	"v4mask": "/16",
+	    	"supported": 1
+	    },
+	    "TECFF": {
+	        "ccode": "TECFF",
+	    	"name": "Freifunk Altdorf e.V.",
+	    	"nodesURL": "http://tecff.de/data/nodes.json",
+	    	"v6": "2001:470:733f:",
+	    	"v6mask": "/48",
+	    	"v4": "10.120.0.0",
+	    	"v4mask": "/16",
+	    	"supported": 1
+	    },
+	    "FFAN": {
+	        "ccode": "FFAN",
+	    	"name": "Freifunk Ansbach",
+	    	"nodesURL": "https://netmon.freifunk-ansbach.de/api/router_json.php",
+	    	"v6": "2001:470:5168:",
+	    	"v6mask": "/64",
+	    	"v4": "10.123.64.0",
+	    	"v4mask": "/18",
+	    	"supported": 0
+	    },
+	    "FF3L": {
+	        "ccode": "FF3L",
+	    	"name": "Freifunk 3Ländereck",
+	    	"nodesURL": "http://map.freifunk-3laendereck.net/data/nodes.json",
+	    	"v6": "2001:bf7:20:",
+	    	"v6mask": "/44",
+	    	"v4": "110.119.0.0",
+	    	"v4mask": "/16",
+	    	"supported": 1
+	    },
+	    "FFDD": {
+	        "ccode": "FFDD",
+	    	"name": "Freifunk Dresden",
+	    	"nodesURL": "http://api.freifunk-dresden.de/freifunk-nodes.json",
+	    	"v6": "fd11:11ae:7466:",
+	    	"v6mask": "/48",
+	    	"v4": "10.200.0.0",
+	    	"v4mask": "/16",
+	    	"supported": 0
+	    },
+	    "FFRG": {
+	        "ccode": "FFRG",
+	    	"name": "Freifunk Ruhrgebiet",
+	    	"nodesURL": "http://map.freifunk-ruhrgebiet.de/nodes.json",
+	    	"v6": "2a03:2260:50:",
+	    	"v6mask": "/48",
+	    	"v4": "10.53.0.0",
+	    	"v4mask": "/16",
+	    	"supported": 1
+	    },
+	    "FFKBU": {
+	        "ccode": "FFKBU",
+	    	"name": "Freifunk K\u00f6ln, Bonn und Umgebung",
+	    	"nodesURL": "https://map.kbu.freifunk.net/data/nodelist.json",
+	    	"v6": "2001:67C:20A0:",
+	    	"v6mask": "/56",
+	    	"v4": "172.26.0.0",
+	    	"v4mask": "/15",
+	    	"supported": 0
+	    },
+	    "FFEMS": {
+	        "ccode": "FFEMS",
+	    	"name": "Freifunk Emskirchen",
+	    	"nodesURL": "https://netmon.freifunk-emskirchen.de/api/router_json.php",
+	    	"v6": "2001:470:5168:2:",
+	    	"v6mask": "/64",
+	    	"v4": "10.123.192.0",
+	    	"v4mask": "/18",
+	    	"supported": 0
+	    },
+	    "FFEF": {
+	        "ccode": "FFEF",
+	    	"name": "Freifunk Erfurt",
+	    	"nodesURL": "http://map.erfurt.freifunk.net/nodes.json",
+	    	"v6": "",
+	    	"v6mask": "/",
+	    	"v4": "10.99.0.0",
+	    	"v4mask": "/16",
+	    	"supported": 0
+	    },
+	    "FFFR": {
+	        "ccode": "FFFR",
+	    	"name": "Freifunk Franken",
+	    	"nodesURL": "https://netmon.freifunk-franken.de/routerlist.php",
+	    	"v6": "",
+	    	"v6mask": "/",
+	    	"v4": "10.50.64.0",
+	    	"v4mask": "/21",
+	    	"supported": 0
+	    },
+	    "FFE": {
+	        "ccode": "FFE",
+	    	"name": "Freifunk Essen",
+	    	"nodesURL": "http://map.freifunk-ruhrgebiet.de/data/nodes.json",
+	    	"v6": "2a03:2260:1005:",
+	    	"v6mask": "/64",
+	    	"v4": "10.228.0.0",
+	    	"v4mask": "/16",
+	    	"supported": 1
+	    },
+	    "FFEU": {
+	        "ccode": "FFEU",
+	    	"name": "Freifunk Euskirchen",
+	    	"nodesURL": "http://map.freifunk-euskirchen.de/data/nodes.json",
+	    	"v6": "fda0:747e:ab29:e054:",
+	    	"v6mask": "/64",
+	    	"v4": "10.19.0.0",
+	    	"v4mask": "/16",
+	    	"supported": 1
+	    },
+	    "FFFFM": {
+	        "ccode": "FFFFM",
+	    	"name": "Freifunk Frankfurt am Main",
+	    	"nodesURL": "http://map.freifunk-euskirchen.de/data/nodes.json",
+	    	"v6": "fddd:5d16:b5dd:",
+	    	"v6mask": "/48",
+	    	"v4": "10.126.0.0",
+	    	"v4mask": "/16",
+	    	"supported": 1
+	    },
+	    "FFFR1": {
+	        "ccode": "FFFR1",
+	    	"name": "Freifunk Freiburg",
+	    	"nodesURL": "https://freiburg.freifunk.net/ffmap-d3/nodes.json",
+	    	"v6": "fdf0:09bb:7814:",
+	    	"v6mask": "/48",
+	    	"v4": "10.60.0.0",
+	    	"v4mask": "/16",
+	    	"supported": 0
+	    },
+	    "FFHH": {
+	        "ccode": "FFHH",
+	    	"name": "Freifunk Hamburg",
+	    	"nodesURL": "https://map.hamburg.freifunk.net/nodelist.json",
+	    	"v6": "2a03:2267::",
+	    	"v6mask": "/48",
+	    	"v4": "10.112.0.0",
+	    	"v4mask": "/18",
+	    	"supported": 1
+	    }
+    }
+}

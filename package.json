@@ -1,6 +1,6 @@
 {
   "name": "nordlab-hackerspace-door",
-  "version": "0.0.0-semanticly-released",
+  "version": "0.0.2",
   "description": "Modular parser for the hackerspace door status with handlers for multiple services",
   "author": "Marcel Radzio <mtrnord1@gmail.com>",
   "scripts": {
@@ -23,15 +23,28 @@
     "nordlab"
   ],
   "dependencies": {
-    "curlrequest": "^0.5.4",
+    "async": "^2.0.1",
+    "botanio": "0.0.6",
+    "curlrequest": "^0.5.7",
+    "express": "^4.14.0",
     "irc": "^0.5.0",
-    "node-schedule": "^1.0.0",
-    "request": "^2.67.0",
-    "simple-git": "^1.21.0",
+    "jsonfile": "^2.3.1",
+    "lodash": "^4.15.0",
+    "node-schedule": "^1.1.1",
+    "node-telegram-bot-api": "^0.23.3",
+    "request": "^2.74.0",
+    "simple-git": "^1.48.0",
+    "slackbots": "^0.5.2",
+    "string": "^3.3.1",
     "yargs": "^5.0.0"
   },
+  "preferGlobal": false,
+  "private": true,
   "license": "SEE LICENSE IN LICENSE.md",
+  "optionalDependencies": {
+    "yuidocjs": "^0.9.0"
+  },
   "devDependencies": {
-    "semantic-release": "^4.3.5"
+    "request-debug": "^0.2.0"
   }
 }

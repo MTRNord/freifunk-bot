@@ -2,13 +2,13 @@
   "commands": [
     {
       "keyword": "help",
-      "message": "Here is your Help!\nCommand List:\n- !help - Shows this page.\n- !DoorStatus - Shows the actual Door Status in an PM\n- !DoorStatus channel - Shows the actual Door Status in the channel from where it was run\n- !where - Shows the address of the Nordlab e.V.\n- !who - Shows who is allowed to come to the Nordlab e.V.\n- !when - Shows who the Nordlab e.V. Hackerspace usually is open\n- !source - Shows where the source of this bot is.\n- !license - What is the license of the bot?????????",
+      "message": "Here is your Help!\nCommand List:\n- !help - Shows this page.\n- !DoorStatus - Shows the actual Door Status in an PM\n- !DoorStatus channel - Shows the actual Door Status in the channel from where it was run\n- !where - Shows the address of the Nordlab e.V.\n- !who - Shows who is allowed to come to the Nordlab e.V.\n- !when - Shows who the Nordlab e.V. Hackerspace usually is open\n- !source - Shows where the source of this bot is.\n- !license - What is the license of the bot?\n- !bug - Tell me the Bugs you have found :)\n- !afk - Tell the chat that you are away\n- !freifunk - Freifunk Memes \\(^^)/\n- !todo - List of things that have to be done",
       "argument": "1",
       "target": "from"
     },
     {
       "keyword": "hilfe",
-      "message": "Hier ist die Hilfe!\nBefehl-Liste:\n- !hilfe - Zeigt diese Seite an.\n- !DoorStatus - Sendet eine PM mit dem aktuellen Status\n- !DoorStatus channel - Sendet in den Channel wo der Befehl ausgeführt wurde den aktuellen Status\n- !where - Zeigt die Addresse vom Nordlab e.V.\n- !who - Zeigt wer alles in den Nordlab e.V. kommen darf\n- !when - Zeigt wann der Nordlab e.V. Hackerspace geöffnet hat\n- !source - Zeigt wo die Sourcen des Bot's sind.\n- !license - HILFE! Welche Lizenz hat der Bot?????????",
+      "message": "Hier ist die Hilfe!\nBefehl-Liste:\n- !hilfe - Zeigt diese Seite an.\n- !DoorStatus - Sendet eine PM mit dem aktuellen Status\n- !DoorStatus channel - Sendet in den Channel wo der Befehl ausgeführt wurde den aktuellen Status\n- !where - Zeigt die Addresse vom Nordlab e.V.\n- !who - Zeigt wer alles in den Nordlab e.V. kommen darf\n- !when - Zeigt wann der Nordlab e.V. Hackerspace geöffnet hat\n- !source - Zeigt wo die Sourcen des Bot's sind.\n- !license - HILFE! Welche Lizenz hat der Bot?\n- !bug - Nenne mir Fehler die du gefunden hast :)\n- !afk - Teile dem Chat deine Abwesendheit mit\n- !freifunk - Freifunk Memes \\(^^)/\n- !todo - Dinge die ich noch tun muss",
       "argument": "1",
       "target": "from"
     },
@@ -44,7 +44,7 @@
     },
     {
       "keyword": "bug",
-      "message": "You have found an bug? :O Send it right now to https://github.com/MTRNord/nordlab-hackerspace-door/issues",
+      "message": "You have found a bug? :O Send it right now to https://github.com/MTRNord/nordlab-hackerspace-door/issues",
       "argument": "0",
       "target": "from"
     },
@@ -82,15 +82,9 @@
     },
     {
       "keyword": "todo",
-      "message": "- Add ability to do multiple server connections\n- Add SSH Admin Control Server for editing the bot easily",
+      "message": "- Stabelize ability to do multiple server connections\n- Add SSH Admin Control Server for editing the bot easily",
       "argument": "0",
       "target": "from"
-    },
-    {
-      "keyword": "xmas",
-      "message": "Der NordlabBot wünscht euch allen eine frohe und besinliche Weihnachtszeit :)",
-      "argument": "0",
-      "target": "to"
     }
   ]
 }
