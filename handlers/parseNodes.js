@@ -171,7 +171,7 @@ module.exports = {
               if (askedNode.toLowerCase() !== "noarg") {
                 if(handler == "telegram"){
                   bot.sendMessage(TfromId, output, {"parse_mode": "HTML"})
-                  botan.track(Tmsg, 'node ' + ccode_func)
+                  botan.track(Tmsg, 'node ' + ccode_func + " " + askedNode.toLowerCase())
                 }
                 if(handler == "irc"){
                   bot.say(IRCto, output);
