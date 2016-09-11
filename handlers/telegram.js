@@ -8,7 +8,7 @@ if (typeof botan_token === 'undefined' && !botan_token) {
 }
 var TelegramBot = require('node-telegram-bot-api');
 var jsonfile = require('jsonfile')
-var getNodes = require('./getNodes.js');
+var getNodes = require('./parseNodes.js');
 var botan = require('botanio')(botan_token);
 var util = require('util');
 var async = require("async");
@@ -24,12 +24,31 @@ module.exports = {
           var resp = match[1];
           bot.sendChatAction(fromId, "typing")
           jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
-            if (err) {console.log(err)}
+            if (err) {throw new Error(err);}
             var communities = obj
             _.find(communities.communities, function (key) {
                 var ccode = key["ccode"];
                 if (ccode.toLowerCase() === resp.toLowerCase()) {
                   getNodes.countNodes(resp.toLowerCase(), "telegram", fromId, msg, "", bot, botan)
+                }
+            });
+          });
+        });
+        callback()
+      },
+      node: function (callback) {
+        bot.onText(/\/node (.+)/, function (msg, match) {
+          var fromId = msg.chat.id;
+          var resp = match[1];
+          var args = _.split(resp, ' ');
+          bot.sendChatAction(fromId, "typing")
+          jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
+            if (err) {throw new Error(err);}
+            var communities = obj
+            _.find(communities.communities, function (key) {
+                var ccode = key["ccode"];
+                if (ccode.toLowerCase() === args[0].toLowerCase()) {
+                  getNodes.NodeInfo(args[0].toLowerCase(), args[1].toLowerCase(), "telegram", fromId, msg, "", bot, botan)
                 }
             });
           });
@@ -43,7 +62,7 @@ module.exports = {
           bot.sendChatAction(fromId, "typing")
           jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
             var communities = obj
-            var communities_list
+            var communities_list = ""
             _.find(communities.communities, function (key) {
                 var ccode = key["ccode"]
                 var name = key["name"]
@@ -51,7 +70,7 @@ module.exports = {
             });
             botan.track(msg, 'communities', function (err, res, body) {
               if (err) {
-                console.log("[BOTAN] ERR: " + err);
+                throw new Error("[BOTAN] ERR: " + err);
               }
               console.log("[BOTAN] RES: " + res.statusCode);
               console.log("[BOTAN] BODY: " + util.inspect(body, {showHidden: false, depth: null}));
@@ -64,7 +83,7 @@ module.exports = {
     },
     function(err, result) {
       if (err) {
-        console.log(err)
+        throw new Error(err)
       }
     }
     );
