@@ -21,7 +21,7 @@ var _ = require("lodash");
  */
 module.exports = {
   saveNodes: function () {
-    request.get('https://cdn.rawgit.com/MTRNord/gluon-web-remote/5d0c3a2c49b79d2971b8b3cc24398d45833ad1c6/configs/communities.json', function (err, res, body) {
+    request.get('https://cdn.rawgit.com/MTRNord/gluon-web-remote/master/configs/communities.json', function (err, res, body) {
 
       if (!err && res.statusCode === 200) {
         /**
