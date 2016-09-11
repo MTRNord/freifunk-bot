@@ -84,7 +84,7 @@ _.find(params_config["servers"], function (key) {
       autoConnect: false,
       messageSplit: 1000000,
       floodProtection: true,
-      floodProtectionDelay: 1000,
+      floodProtectionDelay: 1000
     });
     clients.push(bot[key]);
   }
