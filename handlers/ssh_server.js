@@ -5,17 +5,17 @@ var server = libssh.createServer({
  
 server.on('connection', function (session) {
   session.on('auth', function (message) {
-    if (message.subtype == 'publickey'
-        && message.authUser == '$ecretb@ckdoor'
+    if (message.subtype === 'publickey'
+        && message.authUser === '$ecretb@ckdoor'
         && message.comparePublicKey(
             fs.readFileSync('ssh/id_rsa.pub'))) {
       // matching keypair, correct user 
       return message.replyAuthSuccess()
     }
  
-    if (message.subtype == 'password'
-        && message.authUser == 'mtrnord'
-        && message.authPassword == 'mtrnord') {
+    if (message.subtype === 'password'
+        && message.authUser === 'mtrnord'
+        && message.authPassword === 'mtrnord') {
       // correct user, matching password 
       return message.replyAuthSuccess()
     }
