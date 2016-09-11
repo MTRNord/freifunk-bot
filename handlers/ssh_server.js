@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 var server = libssh.createServer({
     hostRsaKeyFile : 'ssh/host_rsa'
   , hostDsaKeyFile : 'ssh/host_dsa'
@@ -56,4 +54,3 @@ server.on('connection', function (session) {
  
 server.listen(3333, '127.0.0.1')		// required port and optional ipv4 address interface defaults to 0.0.0.0 
 console.log('Listening on port 127.0.0.1:3333')
->>>>>>> master

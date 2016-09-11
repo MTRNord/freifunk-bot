@@ -14,6 +14,8 @@ var params_config = require("./configs/ircServer.json");
 var autoupdate = params_config["autoupdate"];
 var async = require("async");
 var _ = require("lodash");
+var rl = require("readline")
+var child = require('child_process')
 
 //LOAD MODULES DOWN HERE
 require('./helper/heroku.js');
@@ -42,7 +44,7 @@ function GetData(){
    * @type String
    */
 	request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
-    	if (!error && response.statusCode == 200) {
+    	if (!error && response.statusCode === 200) {
     		/**
          * Content of status_page
          *
@@ -61,7 +63,7 @@ function GetData(){
       		door_status = error;
    		}
    		//If no error -> go on
-    	if (!error && response.statusCode == 200) {
+    	if (!error && response.statusCode === 200) {
       		if (door_status2 !== door_status){
       			//Handle first run
         		if (door_status2 !== "1") {
@@ -73,7 +75,7 @@ function GetData(){
                */
           			door_status2 = door_status;
           			//Translate var's
-         			if (door_status == "geschlossen"){
+         			if (door_status === "geschlossen"){
             		door_status = "closed";
          			}else{
             		door_status = "open";
@@ -98,7 +100,7 @@ function GetData(){
 }
 //Handle "[CTRL]+[C]"
 if (process.platform === "win32") {
-	var rl = require("readline").createInterface({
+	rl.createInterface({
 		input: process.stdin,
 		output: process.stdout
 	}).setMaxListeners(0);
@@ -118,6 +120,7 @@ process.on(SIGINT, function () {
  */
 function update(){
   git.pull("origin", "master", function(err, update) {
+    if (err) {console.log(err)}
     if(update && update.summary.changes) {
       console.log('Start Update!');
       restart();
@@ -133,7 +136,7 @@ function update(){
 function restart(){
   console.log('Daily restart!');
   irc.ircEndCustom('Restart! Coming back in a few Seconds!');
-  require('child_process').exec('npm restart');
+  child.exec('npm restart');
 }
 
 // var j = schedule.scheduleJob('59 3 * * *', function(){

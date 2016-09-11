@@ -13,6 +13,7 @@ var S = require('string');
 var jsonfile = require('jsonfile')
 var async = require("async");
 var _ = require("lodash");
+var rl = require("readline")
 
 
 var command_config = require("../configs/commands.json");
@@ -67,16 +68,11 @@ _.find(params_config["servers"], function (key) {
   main_channel = key["main_channel"];
   active = key["active"];
   debug = key["debug"];
-  if (debug == 1) {
-    debug = true;
-  }else{
-    debug = false;
-  }
   if (debug == false) {
     console = console || {};
     console.log = function(){};
   }
-  if (active == 1) {
+  if (active === 1) {
     bot[key] = new irc.Client(serveraddress, botname, {
       debug: debug,
       channels: [main_channel],
@@ -245,21 +241,21 @@ module.exports = {
         commandFile: function (callback) {
           _.find(command_config["commands"], function (key) {
             if (S(message).contains("!" + key["keyword"])) {
-              if (key["before"] == "from") {
-      					if (key["target"] == "from") {
+              if (key["before"] === "from") {
+      					if (key["target"] === "from") {
       						say(from, from + key["message"]);
       					} else {
       						say(to, from + key["message"]);
       					}
       				} else {
       					if (!key["before"]) {
-      						if (key["target"] == "from") {
+      						if (key["target"] === "from") {
       							say(from, key["message"]);
       						} else {
       							say(to, key["message"]);
       						}
       					} else {
-      						if (key["target"] == "from") {
+      						if (key["target"] === "from") {
       							say(from, to + key["message"]);
       						} else {
       							say(to, to + key["message"]);
@@ -282,7 +278,7 @@ module.exports = {
   		    channel = cleanArray(channel);
   		    if (S(channel[0] + " " + channel[1]).contains("!source this")) {
             console.log("!source " + channel[1]);
-            if (channel[1] == "this") {
+            if (channel[1] === "this") {
               join(to);
               say(to, "You can find the Source of this bot at https://github.com/MTRNord/nordlab-hackerspace-door");
             }
@@ -321,7 +317,7 @@ module.exports = {
         doorstatus: function (callback) {
       		if (S(message).contains("!doorstatus")) {
       			request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
-      			 if (!error && response.statusCode == 200) {
+      			 if (!error && response.statusCode === 200) {
       				/**
             		* Content of status_page
             		*
@@ -340,8 +336,8 @@ module.exports = {
     	      		door_status = error;
     	      		console.log(error);
     	      	}
-              if (!error && response.statusCode == 200) {
-    	      	  if (door_status == "geschlossen") {
+              if (!error && response.statusCode === 200) {
+    	      	  if (door_status === "geschlossen") {
     	      	    door_status = "closed";
     	      	  } else {
     	      		 	door_status = "open";
@@ -357,7 +353,7 @@ module.exports = {
         doorstatusThis: function (callback) {
       		if (S(channel[0] + " " + channel[1]).contains("!doorstatus this")) {
       			request.get('http://www.nordlab-ev.de/doorstate/status.txt', function (error, response, body) {
-      				if (!error && response.statusCode == 200) {
+      				if (!error && response.statusCode === 200) {
       					/**
             			* Content of status_page
             			*
@@ -377,7 +373,7 @@ module.exports = {
     	      		console.log(error);
     	      	}
               if (!error && response.statusCode == 200) {
-    	      	  if (door_status == "geschlossen") {
+    	      	  if (door_status === "geschlossen") {
                   door_status = "closed";
     	      	  } else {
     	      		 	door_status = "open";
@@ -390,7 +386,7 @@ module.exports = {
                   if (channel[1] !== " ") {
                     addListener('channellist', function (channel_list) {
                       _.find(channel_list, function (key) {
-                        if (key["name"] == channel[1]) {
+                        if (key["name"] === channel[1]) {
                           join(channel[1]);
                           say(channel[1], "DoorStatus is: " + door_status);
                         }
@@ -411,10 +407,10 @@ module.exports = {
         },
         kill: function (callback) {
           if (S(message).contains("!kill")) {
-            if ((from == "DasNordlicht") || (from == "MTRNord")) {
+            if ((from === "DasNordlicht") || (from === "MTRNord")) {
               console.log(from + ' => ' + to + ': ' + message);
         		  if (process.platform === "win32") {
-        				var rl = require("readline").createInterface({
+        				rl.createInterface({
         					input: process.stdin,
         					output: process.stdout
         				});
@@ -426,7 +422,7 @@ module.exports = {
         },
         join: function (callback) {
           if (S(message).contains("!join")) {
-            if ((from == "DasNordlicht") || (from == "MTRNord")) {
+            if ((from === "DasNordlicht") || (from === "MTRNord")) {
               console.log(from + ' => ' + to + ': ' + message);
               join(channel[1]);
             }
