@@ -10,8 +10,6 @@ var TelegramBot = require('node-telegram-bot-api');
 var jsonfile = require('jsonfile')
 var getNodes = require('./getNodes.js');
 var botan = require('botanio')(botan_token);
-var ent = require('ent');
-var decode = require('ent/decode');
 var util = require('util');
 var async = require("async");
 var _ = require("lodash");
@@ -44,12 +42,11 @@ module.exports = {
           var resp = match[1];
           bot.sendChatAction(fromId, "typing")
           jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
-            if (err) {console.log(err)}
             var communities = obj
-            var communities_list = ""
+            var communities_list
             _.find(communities.communities, function (key) {
-                var ccode = decode(key["ccode"])
-                var name = decode(key["name"])
+                var ccode = key["ccode"]
+                var name = key["name"]
                 communities_list = communities_list + name + ": " + ccode + "\n"
             });
             botan.track(msg, 'communities', function (err, res, body) {

@@ -14,7 +14,6 @@ var params_config = require("./configs/ircServer.json");
 var autoupdate = params_config["autoupdate"];
 var async = require("async");
 var _ = require("lodash");
-var rl = require("readline")
 var child = require('child_process')
 
 //LOAD MODULES DOWN HERE
@@ -100,7 +99,7 @@ function GetData(){
 }
 //Handle "[CTRL]+[C]"
 if (process.platform === "win32") {
-	rl.createInterface({
+	var rl = require("readline").createInterface({
 		input: process.stdin,
 		output: process.stdout
 	}).setMaxListeners(0);
