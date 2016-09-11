@@ -159,7 +159,7 @@ module.exports = {
                   since = key["firstseen"]
                   lat = key["nodeinfo"]["location"]["latitude"]
                   long = key["nodeinfo"]["location"]["longitude"]
-                  request.get('http://nominatim.openstreetmap.org/reverse?format=json&lat='+ lat + '&lon=' + lon + '&zoom=18&addressdetails=1', function (error, response, body) {
+                  request.get('http://nominatim.openstreetmap.org/reverse?format=json&lat='+ lat + '&lon=' + lon + '&zoom=18&addressdetails=1'), function (error, response, body) {
                     if (!error && response.statusCode === 200) {
                       addressJson = JSON.parse(body)
                       _.find(addressJson.address, function (key) {
@@ -171,7 +171,7 @@ module.exports = {
                         adress = road + " " + house_number + ", " + postcode + " " + town + ", " + country
                       });
                     }
-                  });
+                  }
                   if(handler == "telegram"){
                     output = "<b>Name: </b>" + name + "\n<b>Router Location: </b>" + adress + "\n<b>Router Model: </b>" + router + "\n<b>Firmware Version: </b>" + version + "\n<b>Autoupdater Status: </b>" + autoupdate + "\n<b>Autoupdater Branch: </b>" + autoupdateBranch + "\n<b>Clients Connected: </b>" + clients + "\n<b>Online Status: </b>" + status + "\n<b>First Seen: </b>" + since
                   }
