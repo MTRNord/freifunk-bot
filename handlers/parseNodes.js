@@ -169,17 +169,17 @@ module.exports = {
                         postcode = key["postcode"]
                         country = key["country"]
                         adress = road + " " + house_number + ", " + postcode + " " + town + ", " + country
+                        if(handler == "telegram"){
+                          output = "<b>Name: </b>" + name + "\n<b>Router Location: </b>" + adress + "\n<b>Router Model: </b>" + router + "\n<b>Firmware Version: </b>" + version + "\n<b>Autoupdater Status: </b>" + autoupdate + "\n<b>Autoupdater Branch: </b>" + autoupdateBranch + "\n<b>Clients Connected: </b>" + clients + "\n<b>Online Status: </b>" + status + "\n<b>First Seen: </b>" + since
+                        }
+                        if(handler == "irc"){
+                          output = "Name: " + name + "\nRouter Location: " + adress + "\nRouter Model: " + router + "\nFirmware Version: " + version + "\nAutoupdater Status: " + autoupdate + "\nAutoupdater Branch: " + autoupdateBranch + "\nClients Connected: " + clients + "\nOnline Status: " + status + "\nFirst Seen: " + since
+                        }
+                        if(handler == "slack"){
+                          output = "<b>Name: </b>" + name + "\n<b>Router Location: </b>" + adress + "\n<b>Router Model: </b>" + router + "\n<b>Firmware Version: </b>" + version + "\n<b>Autoupdater Status: </b>" + autoupdate + "\n<b>Autoupdater Branch: </b>" + autoupdateBranch + "\n<b>Clients Connected: </b>" + clients + "\n<b>Online Status: </b>" + status + "\n<b>First Seen: </b>" + since
+                        }
                       });
                     }
-                  }
-                  if(handler == "telegram"){
-                    output = "<b>Name: </b>" + name + "\n<b>Router Location: </b>" + adress + "\n<b>Router Model: </b>" + router + "\n<b>Firmware Version: </b>" + version + "\n<b>Autoupdater Status: </b>" + autoupdate + "\n<b>Autoupdater Branch: </b>" + autoupdateBranch + "\n<b>Clients Connected: </b>" + clients + "\n<b>Online Status: </b>" + status + "\n<b>First Seen: </b>" + since
-                  }
-                  if(handler == "irc"){
-                    output = "Name: " + name + "\nRouter Location: " + adress + "\nRouter Model: " + router + "\nFirmware Version: " + version + "\nAutoupdater Status: " + autoupdate + "\nAutoupdater Branch: " + autoupdateBranch + "\nClients Connected: " + clients + "\nOnline Status: " + status + "\nFirst Seen: " + since
-                  }
-                  if(handler == "slack"){
-                    output = "<b>Name: </b>" + name + "\n<b>Router Location: </b>" + adress + "\n<b>Router Model: </b>" + router + "\n<b>Firmware Version: </b>" + version + "\n<b>Autoupdater Status: </b>" + autoupdate + "\n<b>Autoupdater Branch: </b>" + autoupdateBranch + "\n<b>Clients Connected: </b>" + clients + "\n<b>Online Status: </b>" + status + "\n<b>First Seen: </b>" + since
                   }
                 }
               });
