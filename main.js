@@ -20,7 +20,7 @@ var child = require('child_process')
 require('./helper/heroku.js');
 var pushbullet = require('./handlers/pushbullet.js');
 var irc = require('./handlers/irc.js');
-var slack = require('./handlers/slack.js');
+//var slack = require('./handlers/slack.js');
 var getNodes = require('./handlers/parseNodes.js');
 var telegram = require('./handlers/telegram.js');
 
