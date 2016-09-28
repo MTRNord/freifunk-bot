@@ -11,7 +11,7 @@ var request = require('request')
 //require('request-debug')(request);
 var fs = require('fs');
 var jsonfile = require('jsonfile')
-var slack = require('./slack.js');
+//var slack = require('./slack.js');
 var _ = require("lodash");
 /**
  * Get Community Config at start
@@ -93,9 +93,9 @@ module.exports = {
                 if(handler == "irc"){
                   bot.say(IRCto, output);
                 }else {
-                  if(handler == "slack"){
-                    slack.slackSend(Schannel, output);
-                  }
+                  //if(handler == "slack"){
+                    //slack.slackSend(Schannel, output);
+                  //}
                 }
               }
             }else{
@@ -163,9 +163,9 @@ module.exports = {
                   if(handler == "irc"){
                     output = "Name: " + name + "\nRouter Model: " + router + "\nFirmware Version: " + version + "\nAutoupdater Status: " + autoupdate + "\nAutoupdater Branch: " + autoupdateBranch + "\nClients Connected: " + clients + "\nOnline Status: " + status + "\nFirst Seen: " + since
                   }
-                  if(handler == "slack"){
-                    output = "<b>Name: </b>" + name + "\n<b>Router Model: </b>" + router + "\n<b>Firmware Version: </b>" + version + "\n<b>Autoupdater Status: </b>" + autoupdate + "\n<b>Autoupdater Branch: </b>" + autoupdateBranch + "\n<b>Clients Connected: </b>" + clients + "\n<b>Online Status: </b>" + status + "\n<b>First Seen: </b>" + since
-                  }
+                  //if(handler == "slack"){
+                    //output = "<b>Name: </b>" + name + "\n<b>Router Model: </b>" + router + "\n<b>Firmware Version: </b>" + version + "\n<b>Autoupdater Status: </b>" + autoupdate + "\n<b>Autoupdater Branch: </b>" + autoupdateBranch + "\n<b>Clients Connected: </b>" + clients + "\n<b>Online Status: </b>" + status + "\n<b>First Seen: </b>" + since
+                  //}
                 }
               });
               if (askedNode.toLowerCase() !== "noarg") {
@@ -176,9 +176,9 @@ module.exports = {
                 if(handler == "irc"){
                   bot.say(IRCto, output);
                 }
-                if(handler == "slack"){
-                  slack.slackSend(Schannel, output);
-                }
+                //if(handler == "slack"){
+                  //slack.slackSend(Schannel, output);
+                //}
               }
             }else{
               /**
