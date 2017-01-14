@@ -79,12 +79,6 @@
       "message": "http://memegen.link/buzz/freifunk/everywhere.-the-dream.jpg",
       "argument": "0",
       "target": "to"
-    },
-    {
-      "keyword": "todo",
-      "message": "- Stabelize ability to do multiple server connections\n- Add SSH Admin Control Server for editing the bot easily",
-      "argument": "0",
-      "target": "from"
     }
   ]
 }
