@@ -1,6 +1,8 @@
 [![Code Climate](https://codeclimate.com/github/MTRNord/nordlab-hackerspace-door/badges/gpa.svg)](https://codeclimate.com/github/MTRNord/nordlab-hackerspace-door)
 Nordlab Bot
 ===========
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/MTRNord/nordlab-hackerspace-door.svg)](https://greenkeeper.io/)
 Modular parser for the hackerspace door status with handlers for multiple services and IRC Bot for the Nordlab e.V.
 
 How to install

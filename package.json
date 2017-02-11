@@ -25,7 +25,7 @@
   "dependencies": {
     "async": "^2.1.2",
     "botanio": "0.0.6",
-    "curlrequest": "^0.5.7",
+    "curlrequest": "^1.0.1",
     "express": "^4.14.1",
     "irc": "^0.5.0",
     "jsonfile": "^2.4.0",
@@ -34,7 +34,7 @@
     "node-telegram-bot-api": "^0.27.0",
     "request": "^2.75.0",
     "simple-git": "^1.55.0",
-    "slackbots": "^0.5.3",
+    "slackbots": "^1.0.2",
     "string": "^3.3.3",
     "yargs": "^6.6.0"
   },
@@ -42,7 +42,7 @@
   "private": true,
   "license": "SEE LICENSE IN LICENSE.md",
   "optionalDependencies": {
-    "yuidocjs": "^0.9.0"
+    "yuidocjs": "^0.10.2"
   },
   "devDependencies": {
     "request-debug": "^0.2.0"
