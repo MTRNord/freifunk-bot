@@ -31,7 +31,7 @@
     "jsonfile": "^2.4.0",
     "lodash": "^4.17.4",
     "node-schedule": "^1.2.3",
-    "node-telegram-bot-api": "^0.27.0",
+    "node-telegram-bot-api": "^0.27.1",
     "request": "^2.75.0",
     "simple-git": "^1.73.0",
     "slackbots": "^1.0.2",
