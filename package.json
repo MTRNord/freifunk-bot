@@ -4,8 +4,7 @@
   "description": "Modular parser for the hackerspace door status with handlers for multiple services",
   "author": "Marcel Radzio <mtrnord1@gmail.com>",
   "scripts": {
-    "start": "node main.js",
-    "heroku-prebuild": "npm install --no-optional",
+    "start": "node main.js"
   },
   "main": "main.js",
   "repository": {
