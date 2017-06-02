@@ -5,7 +5,7 @@
   "author": "Marcel Radzio <mtrnord1@gmail.com>",
   "scripts": {
     "start": "node main.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "heroku-prebuild": "npm install --no-optional",
   },
   "main": "main.js",
   "repository": {
