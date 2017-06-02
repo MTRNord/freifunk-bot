@@ -23,7 +23,7 @@
     	"FFNORD": {
     	    "ccode": "FFNORD",
 	    	"name": "Freifunk Nord",
-		"nodesURL": "https://mesh.nord.freifunk.net/data/nodes.json",
+		"nodesURL": "https://mesh.freifunknord.de/data/nodes.json",
 	    	"v6": "2a03:2267:4e6f:7264:",
 	    	"v6mask": "/64",
 	    	"v4": "10.187.0.0",
