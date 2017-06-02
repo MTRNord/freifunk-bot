@@ -26,8 +26,7 @@ module.exports = {
           jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
             if (err) {throw new Error(err);}
             var communities = obj
-            _.find(communities, function (key) {
-                var ccode = key;
+            _.forEach(communities, function (key, ccode) {
                 if (ccode.toLowerCase() === resp.toLowerCase()) {
                   getNodes.countNodes(resp.toLowerCase(), "telegram", fromId, msg, "", bot, botan)
                 }
@@ -45,8 +44,7 @@ module.exports = {
           jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
             if (err) {throw new Error(err);}
             var communities = obj
-            _.find(communities, function (key) {
-                var ccode = key;
+            _.forEach(communities, function (key, ccode) {
                 if (ccode.toLowerCase() === args[0].toLowerCase()) {
                   getNodes.NodeInfo(args[0].toLowerCase(), args[1].toLowerCase(), "telegram", fromId, msg, "", bot, botan)
                 }
@@ -63,8 +61,7 @@ module.exports = {
           jsonfile.readFile('handlers/tmp/communities.json', 'utf8', function (err,obj) {
             var communities = obj
             var communities_list = ""
-            _.find(communities, function (key) {
-                var ccode = key
+            _.forEach(communities, function (key, ccode) {
                 var name = key["name"]
                 communities_list = communities_list + name + ": " + ccode + "\n"
             });
