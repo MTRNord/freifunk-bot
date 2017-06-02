@@ -58,8 +58,7 @@ module.exports = {
         return console.log(err);
       }
       var communities = obj
-      _.find(communities, function (key) {
-        var ccode = key;
+      _.forEach(communities, function (key, ccode) {
         if (ccode.toLowerCase() == ccode_func.toLowerCase()) {
           var nodesFile_link = key["nodesURL"];
           var name = key["name"];
@@ -73,7 +72,7 @@ module.exports = {
                 */
               var count = 0;
               nodes = JSON.parse(body)
-              _.find(nodes.nodes, function (key) {
+              _.forEach(nodes.nodes, function (key) {
                 if (key.hasOwnProperty('flags')) {
                   if (key["flags"]["online"] == true) {
                     count++;
@@ -119,8 +118,7 @@ module.exports = {
         throw new Error(err);
       }
       var communities = obj
-      _.find(communities, function (key) {
-        var ccode = key;
+      _.forEach(communities, function (key, ccode) {
         if (ccode.toLowerCase() == ccode_func.toLowerCase()) {
           var nodesFile_link = key["nodesURL"];
           request.get(nodesFile_link, function (err, res, body) {
@@ -142,7 +140,7 @@ module.exports = {
               var clients = ""
               var status = ""
               var since = ""
-              _.find(nodes.nodes, function (key) {
+              _.forEach(nodes.nodes, function (key) {
                 name = key["nodeinfo"]["hostname"]
                 if (name.toLowerCase() == askedNode.toLowerCase()){
                   router = key["nodeinfo"]["hardware"]["model"]
