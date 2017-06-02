@@ -59,7 +59,7 @@ module.exports = {
       }
       var communities = obj
       _.find(communities.communities, function (key) {
-        var ccode = key["ccode"];
+        var ccode = key;
         if (ccode.toLowerCase() == ccode_func.toLowerCase()) {
           var nodesFile_link = key["nodesURL"];
           var name = key["name"];
@@ -120,7 +120,7 @@ module.exports = {
       }
       var communities = obj
       _.find(communities.communities, function (key) {
-        var ccode = key["ccode"];
+        var ccode = key;
         if (ccode.toLowerCase() == ccode_func.toLowerCase()) {
           var nodesFile_link = key["nodesURL"];
           request.get(nodesFile_link, function (err, res, body) {
