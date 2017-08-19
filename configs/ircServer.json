@@ -8,7 +8,7 @@
       "serveraddress": "irc.lugfl.de",
       "main_channel": "#hackerspace",
       "nickserv_pass": "FreifunkBotPass",
-      "active": 1,
+      "active": 0,
       "debug": 1
     },
     {
@@ -16,7 +16,7 @@
       "serveraddress": "irc.hackint.org",
       "main_channel": "#ffnord",
       "nickserv_pass": "FreifunkBotPass",
-      "active": 1,
+      "active": 0,
       "debug": 1
     }
   ]
