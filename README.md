@@ -1,4 +1,4 @@
-[![Code Climate](https://codeclimate.com/github/MTRNord/nordlab-hackerspace-door/badges/gpa.svg)](https://codeclimate.com/github/MTRNord/nordlab-hackerspace-door)
+[![Code Climate](https://codeclimate.com/github/MTRNord/nordlab-hackerspace-door/badges/gpa.svg)](https://codeclimate.com/github/MTRNord/nordlab-hackerspace-door) [![Total alerts](https://img.shields.io/lgtm/alerts/g/MTRNord/freifunk-bot.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/MTRNord/freifunk-bot/alerts/)
 Nordlab Bot
 ===========
 
